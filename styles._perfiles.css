@@ -1,0 +1,320 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.contenedor-perfil {
+    background-color: white;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: aparecerPerfil 0.4s ease-out;
+}
+
+.header-perfil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #4a9b8e;
+    color: white;
+}
+
+.header-perfil h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.boton-salir {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.boton-salir:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.cuerpo-perfil {
+    padding: 20px;
+}
+
+.info-personal-conductor {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.foto-perfil-grande {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #4a9b8e;
+    flex-shrink: 0;
+}
+
+.foto-perfil-grande img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.datos-personales {
+    flex: 1;
+}
+
+.nombre-completo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.edad, .experiencia {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 3px;
+}
+
+.seccion-calificacion {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #e9ecef;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.seccion-calificacion p {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.estrellas {
+    display: flex;
+    gap: 3px;
+}
+
+.estrella {
+    width: 20px;
+    height: 20px;
+}
+
+.info-vehiculo {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.tipo-vehiculo {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4a9b8e;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.foto-vehiculo {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.foto-vehiculo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.datos-vehiculo {
+    background-color: rgba(74, 155, 142, 0.1);
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.datos-vehiculo h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.datos-vehiculo p {
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.acciones-perfil {
+    display: flex;
+    justify-content: center;
+}
+
+.boton-solicitar-perfil {
+    background: linear-gradient(135deg, #4a9b8e, #6bb6a8);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 0 5px 15px rgba(74, 155, 142, 0.3);
+}
+
+.boton-solicitar-perfil:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(74, 155, 142, 0.4);
+}
+
+.boton-solicitar-perfil:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(74, 155, 142, 0.3);
+}
+
+/* DISEÑO RESPONSIVO */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .contenedor-perfil {
+        max-width: 100%;
+    }
+
+    .header-perfil {
+        padding: 12px 15px;
+    }
+
+    .header-perfil h3 {
+        font-size: 16px;
+    }
+
+    .cuerpo-perfil {
+        padding: 15px;
+    }
+
+    .foto-perfil-grande {
+        width: 70px;
+        height: 70px;
+    }
+
+    .nombre-completo {
+        font-size: 16px;
+    }
+
+    .edad, .experiencia {
+        font-size: 13px;
+    }
+
+    .estrella {
+        width: 18px;
+        height: 18px;
+    }
+
+    .foto-vehiculo {
+        height: 130px;
+    }
+
+    .boton-solicitar-perfil {
+        padding: 12px 25px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-personal-conductor {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .foto-perfil-grande {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 10px;
+    }
+
+    .seccion-calificacion {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .tipo-vehiculo {
+        font-size: 15px;
+    }
+
+    .foto-vehiculo {
+        height: 120px;
+    }
+
+    .boton-solicitar-perfil {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* ANIMACIONES */
+@keyframes aparecerPerfil {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Efecto hover para las estrellas */
+.estrellas:hover .estrella {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+/* Efecto para la foto del conductor */
+.foto-perfil-grande:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Efecto para la foto del vehículo */
+.foto-vehiculo:hover img {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}

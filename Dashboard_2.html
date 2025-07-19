@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Dashboard de Usuarios y Actividad</title>
+    <link rel="stylesheet" href="Dashboard_2.css">
+</head>
+<body>
+    <div class="header-dashboard">
+        <div class="logo-dashboard">
+            <div class="logo-icon">G</div>
+            GoUp Dashboard - Usuarios y Actividad
+        </div>
+        <div class="dashboard-info">
+            <div class="fecha-dashboard" id="fecha-actual"></div>
+            <div class="dashboard-subtitle">Panel de Control Avanzado</div>
+        </div>
+    </div>
+
+    <div id="dashboard">
+        <div class="chart-container">
+            <h2>Usuarios Registrados por Tipo</h2>
+            <p>Nuevos registros en los últimos 30 días<br>Balance entre pasajeros y conductores</p>
+            <div class="chart-wrapper">
+                <canvas id="bar-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Viajes Completados por Semana</h2>
+            <p>Actividad semanal del conductor<br>Últimas 6 semanas de rendimiento</p>
+            <div class="chart-wrapper">
+                <canvas id="line-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Rango de Edades de Pasajeros</h2>
+            <p>Perfil etario de usuarios atendidos<br>Distribución demográfica del último mes</p>
+            <div class="chart-wrapper">
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Actividad por Franja Horaria</h2>
+            <p>Patrón de trabajo del conductor<br>Distribución de actividad durante el día</p>
+            <div class="chart-wrapper">
+                <canvas id="radar-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-summary">
+        <h3>📈 Métricas del Período</h3>
+        <div class="stats-item">
+            <span><div class="stats-icon"></div>Nuevos Usuarios:</span>
+            <span class="stats-value">342</span>
+        </div>
+        <div class="stats-item">
+            <span><div class="stats-icon"></div>Viajes Esta Semana:</span>
+            <span class="stats-value">127</span>
+        </div>
+        <div class="stats-item">
+            <span><div class="stats-icon"></div>Horas Trabajadas:</span>
+            <span class="stats-value">48.5h</span>
+        </div>
+        <div class="stats-item">
+            <span><div class="stats-icon"></div>Eficiencia:</span>
+            <span class="stats-value">92%</span>
+        </div>
+        <div class="stats-item">
+            <span><div class="stats-icon"></div>Franja Más Activa:</span>
+            <span class="stats-value">Tarde</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar fecha actual
+            const fechaActual = document.getElementById('fecha-actual');
+            const hoy = new Date();
+            const opciones = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            fechaActual.textContent = hoy.toLocaleDateString('es-ES', opciones);
+
+            // Paleta de colores GoUp extendida
+            const coloresGoUp = {
+                primario: '#4a9b8e',
+                secundario: '#b0d8d8',
+                oscuro: '#2c3e50',
+                verde: '#27ae60',
+                azul: '#3498db',
+                naranja: '#f39c12',
+                rojo: '#e74c3c',
+                morado: '#9b59b6',
+                turquesa: '#1abc9c',
+                amarillo: '#f1c40f'
+            };
+
+            // Gráfico de Barras - Usuarios Registrados por Tipo
+            var ctxBar = document.getElementById('bar-chart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Pasajeros', 'Conductores'],
+                    datasets: [{
+                        label: 'Nuevos Registros (30 días)',
+                        data: [267, 75],
+                        backgroundColor: [
+                            coloresGoUp.primario + '90',
+                            coloresGoUp.verde + '90'
+                        ],
+                        borderColor: [
+                            coloresGoUp.primario,
+                            coloresGoUp.verde
+                        ],
+                        borderWidth: 3,
+                        borderRadius: 8,
+                        borderSkipped: false,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                            titleColor: '#b0d8d8',
+                            bodyColor: '#ffffff',
+                            borderColor: '#4a9b8e',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.parsed.y / total) * 100).toFixed(1);
+                                    return `${context.parsed.y} usuarios (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(74, 155, 142, 0.15)',
+                                lineWidth: 1
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                font: {
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                font: {
+                                    weight: '600',
+                                    size: 13
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Líneas - Viajes Completados por Semana
+            var ctxLine = document.getElementById('line-chart').getContext('2d');
+            new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6'],
+                    datasets: [{
+                        label: 'Viajes Completados',
+                        data: [89, 112, 95, 134, 118, 127],
+                        fill: true,
+                        backgroundColor: function(context) {
+                            const chart = context.chart;
+                            const {ctx, chartArea} = chart;
+                            if (!chartArea) return null;
+                            
+                            const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                            gradient.addColorStop(0, coloresGoUp.primario + '10');
+                            gradient.addColorStop(0.5, coloresGoUp.primario + '40');
+                            gradient.addColorStop(1, coloresGoUp.primario + '80');
+                            return gradient;
+                        },
+                        borderColor: coloresGoUp.primario,
+                        pointBackgroundColor: coloresGoUp.verde,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                        tension: 0.4,
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                            titleColor: '#b0d8d8',
+                            bodyColor: '#ffffff',
+                            borderColor: '#4a9b8e',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.parsed.y} viajes completados`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(74, 155, 142, 0.15)'
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                font: {
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                font: {
+                                    weight: '500'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Pastel - Rango de Edades
+            var ctxPie = document.getElementById('pie-chart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['18-30 años', '31-50 años', '51+ años'],
+                    datasets: [{
+                        label: 'Rango de Edades',
+                        data: [52, 35, 13],
+                        backgroundColor: [
+                            coloresGoUp.turquesa,
+                            coloresGoUp.primario,
+                            coloresGoUp.azul
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 4,
+                        hoverOffset: 15,
+                        cutout: '60%'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: coloresGoUp.oscuro,
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12,
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                            titleColor: '#b0d8d8',
+                            bodyColor: '#ffffff',
+                            borderColor: '#4a9b8e',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.parsed}% de pasajeros`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Radar - Actividad por Franja Horaria
+            var ctxRadar = document.getElementById('radar-chart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Madrugada\n(00:00-06:00)', 'Mañana\n(06:00-12:00)', 'Tarde\n(12:00-18:00)', 'Noche\n(18:00-00:00)', 'Turnos Extendidos\n(>10h/día)'],
+                    datasets: [{
+                        label: 'Actividad Actual',
+                        data: [15, 75, 95, 80, 25],
+                        fill: true,
+                        backgroundColor: coloresGoUp.primario + '30',
+                        borderColor: coloresGoUp.primario,
+                        pointBackgroundColor: coloresGoUp.primario,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        borderWidth: 3
+                    }, {
+                        label: 'Promedio de Conductores',
+                        data: [20, 65, 85, 70, 30],
+                        fill: true,
+                        backgroundColor: coloresGoUp.verde + '20',
+                        borderColor: coloresGoUp.verde,
+                        pointBackgroundColor: coloresGoUp.verde,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 3,
+                        pointRadius: 6,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: coloresGoUp.oscuro,
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    size: 11,
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(44, 62, 80, 0.9)',
+                            titleColor: '#b0d8d8',
+                            bodyColor: '#ffffff',
+                            borderColor: '#4a9b8e',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.parsed.r}% de actividad`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(74, 155, 142, 0.2)'
+                            },
+                            angleLines: {
+                                color: 'rgba(74, 155, 142, 0.3)'
+                            },
+                            pointLabels: {
+                                color: coloresGoUp.oscuro,
+                                font: {
+                                    size: 10,
+                                    weight: '500'
+                                }
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                backdropColor: 'transparent',
+                                stepSize: 20,
+                                font: {
+                                    size: 9
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Solicitud de Viaje</title>
+    <link rel="stylesheet" href="styles_solicitud_P.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <div class="contenedor-principal">
+        <!-- Panel de solicitud de viaje -->
+            <div class="panel-solicitud">
+                <h2 class="titulo-solicitud">Solicitud de Viaje</h2>
+                
+                <!-- Información del viaje -->
+                <div class="info-viaje">
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Origen:</label>
+                        <p class="valor-campo" id="origen-viaje">Av. Lecaros #171 - Puente Piedra</p>
+                    </div>
+                    
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Destino:</label>
+                        <p class="valor-campo" id="destino-viaje">Av. Trinidad #200 - Pro</p>
+                    </div>
+                    
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Tiempo Estimado:</label>
+                        <p class="valor-campo" id="tiempo-estimado">45 minutos (17.2 km)</p>
+                    </div>
+                </div>
+
+                <!-- Tarifa sugerida -->
+                <div class="tarifa-container">
+                    <div class="tarifa-sugerida">
+                        <span class="etiqueta-tarifa">Tarifa Sugerida:</span>
+                        <span class="valor-tarifa" id="tarifa-sugerida">S/. 42.00</span>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="acciones-viaje">
+                    <a href="pant_confirma_P.html?precio=42.00" class="boton-accion boton-aceptar" id="btn-aceptar">
+                        Aceptar Tarifa Sugerida
+                    </a>
+
+                    <a href="pant_tarifa_P.html" class="boton-accion boton-proponer" id="btn-proponer">
+                        Proponer tu Tarifa
+                    </a>
+                    
+                    <a href="pant_principal.html" class="boton-accion boton-cancelar" id="btn-cancelar">
+                        Cancelar Viaje
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const btnAceptar = document.getElementById('btn-aceptar');
+            const btnProponer = document.getElementById('btn-proponer');
+            const btnCancelar = document.getElementById('btn-cancelar');
+            
+            // Efecto visual para todos los botones (sin funcionalidad)
+            btnAceptar.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+            });
+            
+            btnProponer.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+            });
+            
+            btnCancelar.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

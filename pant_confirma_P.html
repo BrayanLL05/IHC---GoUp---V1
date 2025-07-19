@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Viaje Confirmado</title>
+    <link rel="stylesheet" href="styles_confir_P.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <div class="contenedor-principal">
+            <!-- Panel de confirmación de viaje -->
+            <div class="panel-confirmacion">
+                <div class="icono-confirmacion">
+                    <img src="iconos/confirmar.ico" alt="Confirmado" width="70" height="70">
+                </div>
+                <h2 class="titulo-confirmacion">¡Viaje Confirmado!</h2>
+                <p class="mensaje-confirmacion">Tu conductor llegará en aprox. 5 min.</p>
+                
+                <!-- Información del conductor y vehículo -->
+                <div class="info-conductor">
+                    <div class="nombre-conductor">Carlos Mendoza</div>
+                    
+                    <!-- Sección de calificación -->
+                    <div class="seccion-calificacion">
+                        <p>Calificación:</p>
+                        <div class="estrellas" id="estrellas-conductor">
+                            <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                            <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                            <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                            <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                            <img src="iconos/media_star.ico" alt="Media Estrella" class="estrella">
+                        </div>
+                    </div>
+                    
+                    <div class="vehiculo">Toyota Corolla</div>
+                </div>
+                
+                <!-- Información del viaje -->
+                <div class="info-viaje-confirmado">
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Origen:</label>
+                        <p class="valor-campo">Av. Lecaros #171 - Puente Piedra</p>
+                    </div>
+                    
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Destino:</label>
+                        <p class="valor-campo">Av. Trinidad #200 - Pro</p>
+                    </div>
+                    
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Tiempo Estimado:</label>
+                        <p class="valor-campo">45 minutos (17.2 km)</p>
+                    </div>
+                    
+                    <div class="campo-viaje">
+                        <label class="etiqueta-campo">Tarifa Acordada:</label>
+                        <p class="valor-campo tarifa-acordada" id="tarifa">S/. 42.00</p>
+                    </div>
+                </div>
+
+                <!-- Botón de detalles -->
+                <a href="pant_detalles.html" class="boton-detalles" id="btn-detalles">
+                    Ver Detalles del viaje
+                </a>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnDetalles = document.getElementById('btn-detalles');
+
+            // Efecto visual al presionar el botón
+            btnDetalles.addEventListener('click', function () {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+            });
+
+            // Obtener el precio desde los parámetros de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const precio = urlParams.get('precio');
+
+            // Si hay precio válido, actualizarlo en el DOM
+            if (precio && !isNaN(precio)) {
+                document.getElementById('tarifa').textContent = `S/. ${parseFloat(precio).toFixed(2)}`;
+            }
+        });
+    </script>
+</body>
+</html>

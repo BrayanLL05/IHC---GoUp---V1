@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Chat con Conductor</title>
+    <link rel="stylesheet" href="styles_chat_P.css">
+</head>
+<body>
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+
+        <div class="contenedor-principal">
+            <div class="panel-chat">
+                <div class="header-chat">
+                    <div class="header-izquierda">
+                        <button class="boton-atras">
+                            <a href="pant_tarifa_P.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+                        </button>
+                        <div class="info-conductor">
+                            <div class="nombre-conductor">Carlos Mendoza</div>
+                            <div class="vehiculo">Toyota Corolla</div>
+                        </div>
+                    </div>
+                    <button class="boton-llamada">
+                        <img src="iconos/llamada.ico" alt="Llamar" width="35" height="35">
+                    </button>
+                </div>
+
+                <!-- Área de mensajes -->
+                <div class="contenedor-mensajes" id="contenedor-mensajes">
+                    <!-- Los mensajes se cargarán aquí -->
+                    <div class="mensaje mensaje-usuario">
+                        <div class="burbuja-mensaje">
+                            <p>Hola. Quisiera negociar la tarifa para este viaje.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mensaje mensaje-conductor">
+                        <div class="burbuja-mensaje">
+                            <p>Claro. ¿Qué tarifa tiene en mente?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Área de entrada de mensaje -->
+                <div class="entrada-mensaje">
+                    <input type="text" id="input-mensaje" placeholder="Escribe un mensaje">
+                    <button class="boton-enviar" id="boton-enviar">
+                        <img src="iconos/enviar.ico" alt="Enviar" width="30" height="30">
+                    </button>
+                </div>
+            </div>
+        </div>
+            
+    </div>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputMensaje = document.getElementById('input-mensaje');
+            const botonEnviar = document.getElementById('boton-enviar');
+            const contenedorMensajes = document.getElementById('contenedor-mensajes');
+            const botonLlamada = document.querySelector('.boton-llamada');
+            
+            // Función para enviar mensaje
+            function enviarMensaje() {
+                const mensaje = inputMensaje.value.trim();
+                if (mensaje !== '') {
+                    // Crear elemento de mensaje
+                    const nuevoMensaje = document.createElement('div');
+                    nuevoMensaje.className = 'mensaje mensaje-usuario';
+                    nuevoMensaje.innerHTML = `
+                        <div class="burbuja-mensaje">
+                            <p>${mensaje}</p>
+                        </div>
+                    `;
+                    
+                    // Añadir mensaje al contenedor
+                    contenedorMensajes.appendChild(nuevoMensaje);
+                    
+                    // Limpiar input
+                    inputMensaje.value = '';
+                    
+                    // Scroll al final
+                    contenedorMensajes.scrollTop = contenedorMensajes.scrollHeight;
+                    
+                    // Simular respuesta del conductor después de un tiempo
+                    setTimeout(function() {
+                        simularRespuestaConductor();
+                    }, 1500);
+                }
+            }
+            
+            // Función para simular respuesta del conductor
+            function simularRespuestaConductor() {
+                const respuestas = [
+                    "Podría aceptar S/. 35.00, ¿le parece bien?",
+                ];
+                
+                const respuestaAleatoria = respuestas[Math.floor(Math.random() * respuestas.length)];
+                
+                // Crear elemento de respuesta
+                const nuevaRespuesta = document.createElement('div');
+                nuevaRespuesta.className = 'mensaje mensaje-conductor';
+                nuevaRespuesta.innerHTML = `
+                    <div class="burbuja-mensaje">
+                        <p>${respuestaAleatoria}</p>
+                    </div>
+                `;
+                
+                // Añadir respuesta al contenedor
+                contenedorMensajes.appendChild(nuevaRespuesta);
+                
+                // Scroll al final
+                contenedorMensajes.scrollTop = contenedorMensajes.scrollHeight;
+            }
+            
+            // Event listeners
+            botonEnviar.addEventListener('click', enviarMensaje);
+            
+            inputMensaje.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    enviarMensaje();
+                }
+            });
+            
+            botonLlamada.addEventListener('click', function() {
+                alert('Llamando a Carlos Mendoza...');
+            });
+        });
+    </script>
+</body>
+</html>

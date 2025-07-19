@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Proponer Tarifa</title>
+    <link rel="stylesheet" href="styles_tarifa_P.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <div class="contenedor-principal">
+            <!-- Panel de proponer tarifa -->
+            <div class="panel-proponer-tarifa">
+                <h2 class="titulo-proponer">Proponer Tarifa al conductor</h2>
+                
+                <p class="descripcion-proponer">
+                    Propón una tarifa para tu viaje. El conductor puede aceptarla o hacer una contraoferta.
+                </p>
+                
+                <!-- Control de tarifa -->
+                <div class="control-tarifa">
+                    <div class="tarifa-display">
+                        <span class="simbolo-soles">S/.</span>
+                        <span class="valor-tarifa" id="valor-tarifa">35.00</span>
+                    </div>
+                    
+                    <!-- Slider de tarifa -->
+                    <div class="slider-container">
+                        <input type="range" 
+                               id="slider-tarifa" 
+                               class="slider-tarifa" 
+                               min="8" 
+                               max="42" 
+                               value="35" 
+                               step="0.50">
+                        <div class="slider-labels">
+                            <span class="label-min">Mín. S/. 8.00</span>
+                            <span class="label-max">Máx. S/. 42.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="btn-group acciones-proponer" role="group" aria-label="Botones de acción">
+                    <a href="pant_chat_P.html" class="boton-accion boton-chatear" id="btn-chatear">
+                        Chat
+                    </a>
+
+                    <button class="boton-accion boton-enviar" id="btn-enviar">
+                        <span id="btn-texto">Enviar Propuesta</span>
+                        <div class="spinner-border spinner-border-sm d-none" id="loading-spinner" role="status">
+                            <span class="sr-only">Cargando...</span>
+                        </div>
+                    </button>
+
+                    <a href="pant_solicitud_P.html" class="boton-accion boton-cancelar" id="btn-cancelar">
+                        Cancelar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const sliderTarifa = document.getElementById('slider-tarifa');
+            const valorTarifa = document.getElementById('valor-tarifa');
+            const btnChatear = document.getElementById('btn-chatear');
+            const btnEnviar = document.getElementById('btn-enviar');
+            const btnTexto = document.getElementById('btn-texto');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const btnCancelar = document.getElementById('btn-cancelar');
+
+            // Actualizar valor de tarifa cuando se mueve el slider
+            sliderTarifa.addEventListener('input', function() {
+                const valor = parseFloat(this.value);
+                valorTarifa.textContent = valor.toFixed(2);
+            });
+
+            // Efectos visuales para el botón chatear
+            btnChatear.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+            });
+
+            // Funcionalidad del botón enviar con spinner
+            btnEnviar.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Deshabilitar el botón
+                this.disabled = true;
+                this.classList.add('pulsado');
+                
+                // Ocultar texto y mostrar spinner
+                btnTexto.classList.add('d-none');
+                loadingSpinner.classList.remove('d-none');
+                
+                const tarifaPropuesta = parseFloat(sliderTarifa.value);
+                
+                // Simular proceso de envío (3 segundos)
+                setTimeout(() => {
+                    // Mostrar mensaje de confirmación
+                    alert(`¡Propuesta enviada exitosamente!\nTarifa: S/. ${tarifaPropuesta.toFixed(2)}\n\nEsperando respuesta del conductor...`);
+                    
+                    // Redirigir a la página de confirmación
+                    window.location.href = `pant_confirma_P.html?precio=${tarifaPropuesta.toFixed(2)}`;
+                }, 3000);
+            });
+
+            // Efecto visual para el botón cancelar
+            btnCancelar.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

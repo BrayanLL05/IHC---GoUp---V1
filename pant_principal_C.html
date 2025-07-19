@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Buscar Viaje</title>
+    <link rel="stylesheet" href="styles_pant_prin.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Barra de búsqueda -->
+    <div class="contenedor-busqueda">
+        <div class="barra-busqueda">
+            <img src="iconos/lupa.ico" alt="Buscar" class="icono-buscar" width="20" height="20">
+            <input type="text" placeholder="Buscar destino" class="campo-busqueda">
+        </div>
+    </div>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <!-- Bot flotante -->
+        <div class="bot-contenedor">
+            <div class="bot-icono">
+                <img src="iconos/bot.ico" alt="Bot de GoUp" class="icono-bot">
+            </div>
+            <div class="globo-dialogo">
+                <div class="globo-contenido">
+                    <div class="pregunta-principal">
+                        ¡Nuevo viaje cerca!<br>Hazlo tuyo
+                    </div>
+                    <div class="consulta-adicional">
+                        <p>¿Alguna otra consulta?</p>
+                        <a href="#" class="enlace-dudas">Presióname para resolver tus dudas</a>
+                    </div>
+                </div>
+                <div class="globo-flecha"></div>
+                
+            </div>
+        </div>
+
+        <!-- Marcadores de ubicación en el mapa -->
+        <div class="marcador marcador-1">
+            <div class="pin-ubicacion">📍</div>
+        </div>
+    </div>
+
+    <!-- Panel inferior -->
+    <div class="panel-inferior">
+        <div class="contenido-panel">
+            <button class="boton-pasajeros">Solicitudes Cercanas</button>
+        </div>
+    </div>
+
+    <!-- Panel de solicitudes de pasajeros cercanos (oculto por defecto) -->
+    <div class="panel-pasajeros" id="panel-pasajeros">
+        <div class="header-pasajeros">
+            <h3>Solicitudes Cercanas</h3>
+            <button class="cerrar-pasajeros">&times;</button>
+        </div>
+        
+        <div class="lista-pasajeros">
+            <!-- Pasajero 1 -->
+            <div class="tarjeta-pasajeros">
+                <div class="foto-pasajeros">
+                    <img src="img/foto4.jpg" alt="Lourdes Solis">
+                </div>
+                <div class="info-pasajeros">
+                    <div class="nombre-pasajeros">Lourdes Solis</div>
+                    <div class="detalles-pasajeros">
+                        <span>Distancia: 2km</span>
+                        <span>Destino: Lince</span>
+                    </div>
+                </div>
+                <div class="acciones-pasajeros">
+                    <button class="boton-ver-perfil">Ver Perfil</button>
+                    <button class="boton-solicitar">Solicitar</button>
+                </div>
+            </div>
+            
+            <!-- Pasajero 2 -->
+            <div class="tarjeta-pasajeros">
+                <div class="foto-pasajeros">
+                    <img src="img/foto5.jpg" alt="Joaquín Aguirre">
+                </div>                                         
+                <div class="info-pasajeros">
+                    <div class="nombre-pasajeros">Joaquín Aguirre</div>
+                    <div class="detalles-pasajeros">
+                        <span>Distancia: 3km</span>
+                        <span>Destino: Los Olivos</span>
+                    </div>
+                </div>
+                <div class="acciones-pasajeros">
+                    <button class="boton-ver-perfil">Ver Perfil</button>
+                    <button class="boton-solicitar">Solicitar</button>
+                </div>
+            </div>
+            
+            <!-- Pasajero 3 -->
+            <div class="tarjeta-pasajeros">
+                <div class="foto-pasajeros">
+                    <img src="img/foto6.png" alt="María Gutierrez">
+                </div>
+                <div class="info-pasajeros">
+                    <div class="nombre-pasajeros">María Gutierrez</div>
+                    <div class="detalles-pasajeros">
+                        <span>Distancia: 2km</span>
+                        <span>Destino: Pro</span>
+                    </div>
+                </div>
+                <div class="acciones-pasajeros">
+                    <button class="boton-ver-perfil">Ver Perfil</button>
+                    <a href="pant_tarifa_C.html" class="boton-solicitar">Solicitar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const botonAtras = document.querySelector('.boton-atras');
+        const campoBusqueda = document.querySelector('.campo-busqueda');
+        const botIcono = document.querySelector('.bot-icono');
+        const globoDialogo = document.querySelector('.globo-dialogo');
+        const botonPasajeros = document.querySelector('.boton-pasajeros');
+        const panelPasajeros = document.getElementById('panel-pasajeros');
+        const cerrarPasajeros = document.querySelector('.cerrar-pasajeros');
+        const enlaceDudas = document.querySelector('.enlace-dudas');
+        const iconoPerfil = document.querySelector('.icono-perfil');
+        const botonesVerPerfil = document.querySelectorAll('.boton-ver-perfil');
+        const botonesSolicitar = document.querySelectorAll('.boton-solicitar');
+
+        // Botón atrás
+        botonAtras.addEventListener('click', function() {
+            console.log('Regresando a la pantalla anterior');
+        });
+
+        // Búsqueda
+        campoBusqueda.addEventListener('focus', function() {
+            this.parentElement.classList.add('enfocado');
+        });
+
+        campoBusqueda.addEventListener('blur', function() {
+            this.parentElement.classList.remove('enfocado');
+        });
+
+        campoBusqueda.addEventListener('input', function() {
+            console.log('Buscando:', this.value);
+        });
+
+        // Bot clickeado
+        botIcono.addEventListener('click', function() {
+            globoDialogo.classList.toggle('visible');
+            console.log('Bot clickeado - Globo toggled');
+        });
+
+        // Enlace de dudas
+        enlaceDudas.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Redirigiendo a centro de ayuda...');
+            console.log('Enlace de dudas clickeado');
+        });
+
+        // Icono perfil
+        iconoPerfil.addEventListener('click', function() {
+            alert('Abriendo perfil de usuario...');
+            console.log('Perfil clickeado');
+        });
+
+        // Mostrar panel de pasajeros
+        botonPasajeros.addEventListener('click', function() {
+            this.classList.add('pulsado');
+            setTimeout(() => {
+                this.classList.remove('pulsado');
+            }, 200);
+
+            panelPasajeros.classList.add('activo');
+            console.log('Panel de pasajeros abierto');
+        });
+
+        // Cerrar panel de pasajeros
+        cerrarPasajeros.addEventListener('click', function() {
+            panelPasajeros.classList.remove('activo');
+            console.log('Panel de pasajeros cerrado');
+        });
+
+        // Ver perfil (redirige a perfiles.html con parámetro)
+        botonesVerPerfil.forEach((boton) => {
+            boton.addEventListener('click', function() {
+                console.log('Redirigiendo a perfil de pasajero');
+            });
+        });
+
+        // Botón solicitar
+        botonesSolicitar.forEach((boton, index) => {
+            const nombres = ['Lourdes Solis', 'Joaquín Aguirre', 'María Gutierrez'];
+            boton.addEventListener('click', function() {
+                alert(`Solicitando viaje con ${nombres[index]}`);
+                console.log(`Solicitud enviada a ${nombres[index]}`);
+            });
+        });
+
+        // Cerrar globo si se hace clic fuera
+        document.addEventListener('click', function(e) {
+            if (!botIcono.contains(e.target) && !globoDialogo.contains(e.target)) {
+                globoDialogo.classList.remove('visible');
+            }
+        });
+
+        // Animación de marcadores
+        function animarMarcadores() {
+            const marcadores = document.querySelectorAll('.marcador');
+            marcadores.forEach((marcador, index) => {
+                setTimeout(() => {
+                    marcador.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        marcador.style.transform = 'scale(1)';
+                    }, 200);
+                }, index * 500);
+            });
+        }
+
+        setInterval(animarMarcadores, 3000);
+    });
+    </script>
+
+   
+</body>
+</html>

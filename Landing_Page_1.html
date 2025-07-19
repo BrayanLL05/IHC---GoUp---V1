@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Tu Plataforma de Viajes Compartidos</title>
+    <link rel="stylesheet" href="Landing_Page_1.css">
+</head>
+<body>
+    <div class="landing-container">
+        <div class="main-card">
+            <div class="hero-section">
+                <div class="logo-container">
+                    <div class="logo-icon">G</div>
+                    <h1 class="main-title">Bienvenido a GoUp</h1>
+                    <p class="tagline">Tu viaje comienza aquí</p>
+                </div>
+
+                <p class="subtitle mensaje-llamativo" style="color: white;">
+                    🚗 ¡Empieza tu aventura con GoUp hoy mismo! Regístrate Ahora.
+                </p>
+
+                <div class="opciones-ingreso">
+                    <a href="registro_conductor.html" class="opcion-ingreso conductor">
+                        <img src="iconos/conductor.ico" alt="Conductor" width="32" height="32">
+                        <span>Soy Conductor</span>
+                    </a>
+                    <a href="registro_pasajero.html" class="opcion-ingreso pasajero">
+                        <img src="iconos/pasajero.ico" alt="Pasajero" width="32" height="32">
+                        <span>Soy Pasajero</span>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="iconos/viaje.ico" alt="Viajes Seguros" width="48" height="48">
+                    </div>
+                    <h3 class="feature-title">Viajes Seguros</h3>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="iconos/tarifa.ico" alt="Tarifas Justas" width="48" height="48">
+                    </div>
+                    <h3 class="feature-title">Tarifas Justas</h3>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="iconos/comunidad.ico" alt="Comunidad Confiable" width="48" height="48">
+                    </div>
+                    <h3 class="feature-title">Comunidad Confiable</h3>
+                </div>
+            </div>
+
+            <div class="cta-section">
+                <p class="community-text">
+                    🚗 ¡Descubre la libertad de moverte seguro, económico y sin complicaciones!
+                </p>
+                <p class="sub-text">
+                    Con GoUp, cada viaje es una oportunidad de conectar con tu ciudad de forma segura y accesible.
+                </p>
+                <div class="action-buttons">
+                    <a href="inicio_sesion.html">
+                        <button class="cta-button secondary" id="login-btn">
+                            Iniciar Sesión
+                        </button>
+                    </a> 
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">1,200+</span>
+                        <span class="stat-label">Viajes Completados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">89</span>
+                        <span class="stat-label">Conductores Activos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.7★</span>
+                        <span class="stat-label">Calificación Promedio</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-decoration bg-decoration-1"></div>
+        <div class="bg-decoration bg-decoration-2"></div>
+        <div class="bg-decoration bg-decoration-3"></div>
+    </div>
+
+    <div class="modal-overlay" id="modal-registro">
+        <div class="modal-registro">
+            <div class="modal-header">
+                <h3>¡Únete a GoUp!</h3>
+                <button class="btn-cerrar" id="cerrar-registro">
+                    <img src="iconos/salir.ico" alt="Cerrar" width="20" height="20">
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">Elige cómo quieres formar parte de nuestra comunidad:</p>
+                <div class="registro-opciones">
+                    <a href="registro_pasajero.html" class="opcion-registro" data-tipo="pasajero">
+                        <div class="opcion-icon">
+                            <img src="iconos/pasajero.ico" alt="Pasajero" width="32" height="32">
+                        </div>
+                        <div class="opcion-content">
+                            <h4>Soy Pasajero</h4>
+                            <p>Quiero encontrar conductores para mis viajes</p>
+                        </div>
+                    </a>
+                    
+                    <a href="registro_conductor.html" class="opcion-registro" data-tipo="conductor">
+                        <div class="opcion-icon">
+                            <img src="iconos/conductor.ico" alt="Conductor" width="32" height="32">
+                        </div>
+                        <div class="opcion-content">
+                            <h4>Soy Conductor</h4>
+                            <p>Quiero ofrecer mis servicios de transporte</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="modal-footer">
+                    <p class="terms-text">
+                        Al registrarte, aceptas nuestros 
+                        <a href="#" class="terms-link">Términos y Condiciones</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Dashboard Administrativo</title>
+    <link rel="stylesheet" href="Dashboard_1.css">
+</head>
+<body>
+    <div class="header-dashboard">
+        <div class="logo-dashboard">GoUp Dashboard</div>
+        <div class="fecha-dashboard" id="fecha-actual"></div>
+    </div>
+
+    <div id="dashboard">
+        <div class="chart-container">
+            <h2>Viajes por Distrito</h2>
+            <p>Últimos 7 días - Total de viajes completados</p>
+            <div class="chart-wrapper">
+                <canvas id="bar-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Ingresos por Comisiones</h2>
+            <p>Evolución mensual - Últimos 6 meses (S/.)</p>
+            <div class="chart-wrapper">
+                <canvas id="line-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Métodos de Pago</h2>
+            <p>Distribución de uso en la plataforma</p>
+            <div class="chart-wrapper">
+                <canvas id="pie-chart"></canvas>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>Evaluación de Conductores</h2>
+            <p>Promedio de calificaciones por criterio (1-5 ⭐)</p>
+            <div class="chart-wrapper">
+                <canvas id="radar-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-summary">
+        <h3>Resumen Semanal</h3>
+        <div class="stats-item">
+            <span>Total Viajes:</span>
+            <span class="stats-value">1,247</span>
+        </div>
+        <div class="stats-item">
+            <span>Conductores Activos:</span>
+            <span class="stats-value">89</span>
+        </div>
+        <div class="stats-item">
+            <span>Ingresos Totales:</span>
+            <span class="stats-value">S/. 18,450</span>
+        </div>
+        <div class="stats-item">
+            <span>Calificación Promedio:</span>
+            <span class="stats-value"> 4.3 ⭐</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mostrar fecha actual
+            const fechaActual = document.getElementById('fecha-actual');
+            const hoy = new Date();
+            const opciones = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            fechaActual.textContent = hoy.toLocaleDateString('es-ES', opciones);
+
+            // Colores de GoUp
+            const coloresGoUp = {
+                primario: '#4a9b8e',
+                secundario: '#b0d8d8',
+                oscuro: '#2c3e50',
+                verde: '#27ae60',
+                azul: '#3498db',
+                naranja: '#f39c12',
+                rojo: '#e74c3c',
+                morado: '#9b59b6'
+            };
+
+            // Gráfico de Barras - Viajes por Distrito
+            var ctxBar = document.getElementById('bar-chart').getContext('2d');
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Puente Piedra', 'Pro', 'Los Olivos', 'Cercado de Lima', 'Lince', 'San Martín', 'Independencia'],
+                    datasets: [{
+                        label: 'Número de Viajes',
+                        data: [245, 189, 167, 143, 98, 87, 76],
+                        backgroundColor: [
+                            coloresGoUp.primario + '80',
+                            coloresGoUp.secundario + '80',
+                            coloresGoUp.verde + '80',
+                            coloresGoUp.azul + '80',
+                            coloresGoUp.naranja + '80',
+                            coloresGoUp.morado + '80',
+                            coloresGoUp.rojo + '80'
+                        ],
+                        borderColor: [
+                            coloresGoUp.primario,
+                            coloresGoUp.secundario,
+                            coloresGoUp.verde,
+                            coloresGoUp.azul,
+                            coloresGoUp.naranja,
+                            coloresGoUp.morado,
+                            coloresGoUp.rojo
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(74, 155, 142, 0.1)'
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                maxRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Líneas - Ingresos por Comisiones
+            var ctxLine = document.getElementById('line-chart').getContext('2d');
+            new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                    datasets: [{
+                        label: 'Ingresos por Comisiones (S/.)',
+                        data: [12450, 15230, 18750, 16890, 21340, 18450],
+                        fill: true,
+                        backgroundColor: coloresGoUp.primario + '20',
+                        borderColor: coloresGoUp.primario,
+                        pointBackgroundColor: coloresGoUp.primario,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        tension: 0.4,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(74, 155, 142, 0.1)'
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                callback: function(value) {
+                                    return 'S/. ' + value.toLocaleString();
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Pastel - Métodos de Pago
+            var ctxPie = document.getElementById('pie-chart').getContext('2d');
+            new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Efectivo', 'Billetera Móvil (Yape)', 'Tarjeta de Crédito/Débito'],
+                    datasets: [{
+                        label: 'Métodos de Pago',
+                        data: [45, 35, 20],
+                        backgroundColor: [
+                            coloresGoUp.verde,
+                            coloresGoUp.primario,
+                            coloresGoUp.azul
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 3,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: coloresGoUp.oscuro,
+                                padding: 15,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de Radar - Evaluación de Conductores
+            var ctxRadar = document.getElementById('radar-chart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Puntualidad', 'Amabilidad', 'Presentación Personal', 'Manejo Seguro', 'Limpieza del Vehículo'],
+                    datasets: [{
+                        label: 'Promedio General',
+                        data: [4.2, 4.5, 4.1, 4.6, 4.3],
+                        fill: true,
+                        backgroundColor: coloresGoUp.primario + '30',
+                        borderColor: coloresGoUp.primario,
+                        pointBackgroundColor: coloresGoUp.primario,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        borderWidth: 2
+                    }, {
+                        label: 'Conductores Top (4.5+ ⭐)',
+                        data: [4.8, 4.9, 4.7, 4.9, 4.8],
+                        fill: true,
+                        backgroundColor: coloresGoUp.verde + '20',
+                        borderColor: coloresGoUp.verde,
+                        pointBackgroundColor: coloresGoUp.verde,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: coloresGoUp.oscuro,
+                                padding: 15,
+                                usePointStyle: true,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 5,
+                            grid: {
+                                color: 'rgba(74, 155, 142, 0.2)'
+                            },
+                            angleLines: {
+                                color: 'rgba(74, 155, 142, 0.2)'
+                            },
+                            pointLabels: {
+                                color: coloresGoUp.oscuro,
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            ticks: {
+                                color: coloresGoUp.oscuro,
+                                backdropColor: 'transparent',
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

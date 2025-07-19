@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Perfil de Conductor</title>
+    <link rel="stylesheet" href="styles._perfiles.css">
+</head>
+<body>
+    <div class="contenedor-perfil">
+        <!-- Header del perfil -->
+        <div class="header-perfil">
+            <h3>Perfil de conductor</h3>
+            <button class="boton-salir" onclick="window.location.href='pant_principal.html'">
+                <img src="iconos/salir.ico" alt="Salir" width="20" height="20">
+            </button>
+        </div>
+        
+        <!-- Contenido del perfil -->
+        <div class="cuerpo-perfil">
+            <!-- Información personal del conductor -->
+            <div class="info-personal-conductor">
+                <div class="foto-perfil-grande">
+                    <img id="foto-conductor" src="img/foto1.jpg" alt="Conductor">
+                </div>
+                <div class="datos-personales">
+                    <p class="nombre-completo" id="nombre-conductor">Carlos Mendoza</p>
+                    <p class="edad" id="edad-conductor">Edad: 30 años</p>
+                    <p class="experiencia" id="experiencia-conductor">Experiencia: 2 años y 3 meses</p>
+                </div>
+            </div>
+            
+            <!-- Sección de calificación -->
+            <div class="seccion-calificacion">
+                <p>Calificación:</p>
+                <div class="estrellas" id="estrellas-conductor">
+                    <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                    <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                    <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                    <img src="iconos/star.ico" alt="Estrella" class="estrella">
+                    <img src="iconos/media_star.ico" alt="Media Estrella" class="estrella">
+                </div>
+            </div>
+            
+            <!-- Información del vehículo -->
+            <div class="info-vehiculo">
+                <div class="tipo-vehiculo" id="tipo-vehiculo">Taxi XL</div>
+                <div class="foto-vehiculo">
+                    <img id="foto-vehiculo" src="img/auto1.jpg" alt="Vehículo">
+                </div>
+                <div class="datos-vehiculo">
+                    <h4>Datos del Vehículo</h4>
+                    <p id="marca-vehiculo">Toyota Corolla Hybrid</p>
+                    <p id="color-vehiculo">Color: Azul</p>
+                    <p id="placa-vehiculo">Placa: ASR-45N</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Datos de los conductores
+        const conductores = {
+            1: {
+                nombre: "Carlos Mendoza",
+                edad: "30 años",
+                experiencia: "2 años y 3 meses",
+                foto: "img/foto1.jpg",
+                estrellas: [
+                    "iconos/star.ico",
+                    "iconos/star.ico", 
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/media_star.ico"
+                ],
+                vehiculo: {
+                    foto: "img/auto1.jpg",
+                    marca: "Toyota Corolla Hybrid",
+                    color: "Azul",
+                    placa: "ASR-45N"
+                }
+            },
+            2: {
+                nombre: "Fernando Díaz",
+                edad: "35 años",
+                experiencia: "5 años y 1 mes",
+                foto: "img/foto2.jpg",
+                estrellas: [
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/star.ico"
+                ],
+                vehiculo: {
+                    foto: "img/auto2.jpg",
+                    marca: "Hyundai Sonata",
+                    color: "Negro",
+                    placa: "BDT-78K"
+                }
+            },
+            3: {
+                nombre: "Joshua Miranda",
+                edad: "28 años",
+                experiencia: "1 año y 8 meses",
+                foto: "img/foto3.jpeg",
+                estrellas: [
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/star.ico",
+                    "iconos/media_star.ico"
+                ],
+                vehiculo: {
+                    foto: "img/auto3.jpg",
+                    marca: "Kia Rio",
+                    color: "Rojo",
+                    placa: "CRF-32P"
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener el parámetro del conductor de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const conductorId = urlParams.get('conductor') || '1'; // Por defecto conductor 1
+            
+            // Cargar datos del conductor
+            cargarDatosConductor(conductorId);
+            
+            // Funcionalidad del botón solicitar
+            const botonSolicitar = document.getElementById('boton-solicitar');
+            botonSolicitar.addEventListener('click', function() {
+                const nombreConductor = document.getElementById('nombre-conductor').textContent;
+                alert(`Solicitando viaje con ${nombreConductor}`);
+                console.log(`Viaje solicitado con conductor ${conductorId}`);
+            });
+        });
+
+        function cargarDatosConductor(conductorId) {
+            const conductor = conductores[conductorId];
+            
+            if (!conductor) {
+                console.error('Conductor no encontrado');
+                return;
+            }
+
+            // Cargar información personal
+            document.getElementById('foto-conductor').src = conductor.foto;
+            document.getElementById('foto-conductor').alt = conductor.nombre;
+            document.getElementById('nombre-conductor').textContent = conductor.nombre;
+            document.getElementById('edad-conductor').textContent = `Edad: ${conductor.edad}`;
+            document.getElementById('experiencia-conductor').textContent = `Experiencia: ${conductor.experiencia}`;
+
+            // Cargar estrellas de calificación
+            const contenedorEstrellas = document.getElementById('estrellas-conductor');
+            contenedorEstrellas.innerHTML = '';
+            conductor.estrellas.forEach(estrella => {
+                const imgEstrella = document.createElement('img');
+                imgEstrella.src = estrella;
+                imgEstrella.alt = estrella.includes('media') ? 'Media Estrella' : 'Estrella';
+                imgEstrella.className = 'estrella';
+                contenedorEstrellas.appendChild(imgEstrella);
+            });
+
+            // Cargar información del vehículo
+            document.getElementById('tipo-vehiculo').textContent = conductor.vehiculo.tipo;
+            document.getElementById('foto-vehiculo').src = conductor.vehiculo.foto;
+            document.getElementById('foto-vehiculo').alt = conductor.vehiculo.marca;
+            document.getElementById('marca-vehiculo').textContent = conductor.vehiculo.marca;
+            document.getElementById('color-vehiculo').textContent = `Color: ${conductor.vehiculo.color}`;
+            document.getElementById('placa-vehiculo').textContent = `Placa: ${conductor.vehiculo.placa}`;
+        }
+    </script>
+</body>
+</html>

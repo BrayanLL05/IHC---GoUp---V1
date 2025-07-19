@@ -1,0 +1,481 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* Centrado perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.contenedor-registro {
+    background: linear-gradient(135deg, #4a9b8e, #6bb6a8);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    color: #2c3e50;
+    margin: auto;
+    
+    /* Animación de entrada */
+    animation: aparecerDesdeAbajo 0.8s ease-out;
+}
+
+.titulo {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    letter-spacing: 1px;
+}
+
+.subtitulo {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    line-height: 1.4;
+}
+
+.formulario-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+/* Estilos para los inputs */
+.formulario-registro input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #2c3e50;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: white;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.formulario-registro input:focus {
+    outline: none;
+    border-color: #1a252f;
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.2);
+    transform: translateY(-1px);
+}
+
+.formulario-registro input::placeholder {
+    color: #6c757d;
+    font-weight: 400;
+}
+
+/* Estilos para los botones */
+.boton {
+    padding: 16px 30px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    margin-top: 5px;
+}
+
+.boton-primario {
+    background-color: white;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+}
+
+.boton-primario:hover {
+    background-color: #2c3e50;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+
+.boton-secundario {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #2c3e50;
+    border: 2px solid rgba(44, 62, 80, 0.6);
+}
+
+.boton-secundario:hover {
+    background-color: rgba(44, 62, 80, 0.1);
+    border-color: #2c3e50;
+    transform: translateY(-2px);
+}
+
+.boton-primario:active, .boton-secundario:active {
+    transform: translateY(-1px);
+}
+
+/* ESTILOS DEL MODAL */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-contenido {
+    background: linear-gradient(135deg, #4a9b8e, #6bb6a8);
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #2c3e50;
+    
+    /* Animación del modal */
+    animation: modalAparece 0.4s ease-out;
+}
+
+.modal-titulo {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* ESTILOS DE LAS PESTAÑAS */
+.pestanas-pago {
+    display: flex;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pestana {
+    flex: 1;
+    padding: 12px 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #2c3e50;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.pestana:not(:last-child) {
+    border-right: 2px solid rgba(44, 62, 80, 0.2);
+}
+
+.pestana.activa {
+    background-color: #2c3e50;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+}
+
+.pestana:hover:not(.activa) {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+}
+
+/* CONTENIDO DE LOS MÉTODOS */
+.contenido-metodo {
+    display: none;
+}
+
+.contenido-metodo.activo {
+    display: block;
+}
+
+.formulario-pago {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.campo-grupo label {
+    font-weight: 600;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.campo-grupo input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #2c3e50;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: white;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.campo-grupo input:focus {
+    outline: none;
+    border-color: #1a252f;
+    box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.2);
+}
+
+/* Campo CVV más pequeño */
+#cvv {
+    max-width: 100px;
+}
+
+/* Contenedor especial para fecha con icono */
+.fecha-contenedor {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.fecha-contenedor input {
+    flex: 1;
+    padding-right: 45px;
+    max-width: 150px;
+}
+
+.icono-calendario {
+    position: absolute;
+    right: 12px;
+    font-size: 18px;
+    pointer-events: none;
+}
+
+/* Estilos para información de Yape y Efectivo */
+.info-yape, .info-efectivo {
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(44, 62, 80, 0.3);
+    text-align: center;
+}
+
+.info-yape p, .info-efectivo p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.info-yape p:last-child, .info-efectivo p:last-child {
+    margin-bottom: 0;
+}
+
+/* Contenedor de botones del modal */
+.botones-modal {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.botones-modal .boton {
+    flex: 1;
+    margin-top: 0;
+}
+
+/* Diseño Responsivo - Móvil */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .contenedor-registro {
+        padding: 30px 25px;
+        max-width: 380px;
+        border-radius: 16px;
+    }
+
+    .titulo {
+        font-size: 28px;
+        margin-bottom: 6px;
+    }
+
+    .subtitulo {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+
+    /* Modal en móvil */
+    .modal-overlay {
+        padding: 10px;
+    }
+
+    .modal-contenido {
+        padding: 25px 20px;
+        border-radius: 15px;
+        max-width: 350px;
+    }
+
+    .modal-titulo {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .pestana {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .campo-grupo label {
+        font-size: 15px;
+    }
+
+    .campo-grupo input {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .info-yape p, .info-efectivo p {
+        font-size: 14px;
+    }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+    .modal-overlay {
+        padding: 5px;
+    }
+
+    .modal-contenido {
+        padding: 20px 15px;
+        border-radius: 12px;
+        max-width: 320px;
+    }
+
+    .modal-titulo {
+        font-size: 22px;
+        margin-bottom: 18px;
+    }
+
+    .pestana {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .botones-modal {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+/* Escritorio */
+@media (min-width: 1024px) {
+    .contenedor-registro {
+        max-width: 500px;
+        padding: 50px 40px;
+        border-radius: 24px;
+    }
+
+    .modal-contenido {
+        max-width: 500px;
+        padding: 40px 35px;
+        border-radius: 24px;
+    }
+
+    .modal-titulo {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .pestana {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+
+    .campo-grupo label {
+        font-size: 17px;
+    }
+
+    .campo-grupo input {
+        padding: 14px 18px;
+        font-size: 16px;
+    }
+
+    .info-yape p, .info-efectivo p {
+        font-size: 17px;
+    }
+}
+
+/* Animaciones */
+@keyframes aparecerDesdeAbajo {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalAparece {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Animaciones escalonadas para los elementos del formulario */
+.formulario-registro > * {
+    animation: aparecerDesdeAbajo 0.6s ease-out;
+}
+
+.formulario-registro > *:nth-child(1) { animation-delay: 0.1s; }
+.formulario-registro > *:nth-child(2) { animation-delay: 0.15s; }
+.formulario-registro > *:nth-child(3) { animation-delay: 0.2s; }
+.formulario-registro > *:nth-child(4) { animation-delay: 0.25s; }
+.formulario-registro > *:nth-child(5) { animation-delay: 0.3s; }
+.formulario-registro > *:nth-child(6) { animation-delay: 0.35s; }
+.formulario-registro > *:nth-child(7) { animation-delay: 0.4s; }
+.formulario-registro > *:nth-child(8) { animation-delay: 0.45s; }
+
+/* Efectos especiales para validación visual */
+.formulario-registro input:valid,
+.campo-grupo input:valid {
+    border-color: #28a745;
+}
+
+.formulario-registro input:invalid:not(:placeholder-shown),
+.campo-grupo input:invalid:not(:placeholder-shown) {
+    border-color: #dc3545;
+}

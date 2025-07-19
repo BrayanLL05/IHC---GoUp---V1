@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Vista del Conductor</title>
+    <link rel="stylesheet" href="styles_tarifa_C.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <a href="pant_historial_C.html"><img src="iconos/perfil.ico" alt="Perfil" width="28" height="28"></a>
+        </div>
+    </header>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <div class="contenedor-principal">
+            <!-- Panel de proponer tarifa -->
+            <div class="panel-proponer-tarifa">
+                <!-- Header del panel con temporizador -->
+                <div class="header-panel">
+                    <h2 class="titulo-vista">Visto del Conductor</h2>
+                    <div class="temporizador">
+                        <span id="contador-tiempo">80s</span>
+                    </div>
+                </div>
+                
+                <!-- Información del pasajero y viaje -->
+                <div class="info-pasajero">
+                    <div class="campo-info">
+                        <label class="etiqueta-info">Pasajero(a):</label>
+                        <p class="valor-info">María Gutierrez</p>
+                    </div>
+                    
+                    <div class="campo-info">
+                        <label class="etiqueta-info">Destino:</label>
+                        <p class="valor-info">Av. Trinidad #200 - Pro</p>
+                    </div>
+                    
+                    <div class="campo-info">
+                        <label class="etiqueta-info">Tiempo Estimado:</label>
+                        <p class="valor-info">45 minutos (17.2 km)</p>
+                    </div>
+                    
+                    <div class="campo-info">
+                        <label class="etiqueta-info">Tarifa Propuesta</label>
+                        <p class="valor-info tarifa-propuesta">S/. 35.00</p>
+                    </div>
+                </div>
+
+                <!-- Control de contraoferta -->
+                <div class="control-contraoferta">
+                    <div class="tarifa-display">
+                        <span class="simbolo-soles">S/.</span>
+                        <span class="valor-tarifa" id="valor-contraoferta">35.00</span>
+                    </div>
+                    
+                    <!-- Slider de contraoferta -->
+                    <div class="slider-container">
+                        <input type="range" 
+                               id="slider-contraoferta" 
+                               class="slider-tarifa" 
+                               min="8" 
+                               max="42" 
+                               value="35" 
+                               step="0.50">
+                        <div class="slider-labels">
+                            <span class="label-min">Mín. S/. 8.00</span>
+                            <span class="label-max">Máx. S/. 42.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="acciones-conductor">
+                    <button class="boton-accion boton-contraoferta" id="btn-contraoferta">
+                        Enviar Contraoferta
+                    </button>
+                    
+                    <button class="boton-accion boton-aceptar" id="btn-aceptar">
+                        Aceptar Propuesta del pasajero
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const sliderContraoferta = document.getElementById('slider-contraoferta');
+            const valorContraoferta = document.getElementById('valor-contraoferta');
+            const btnContraoferta = document.getElementById('btn-contraoferta');
+            const btnAceptar = document.getElementById('btn-aceptar');
+            const contadorTiempo = document.getElementById('contador-tiempo');
+            
+            let tiempoRestante = 80;
+
+            // Actualizar valor de contraoferta cuando se mueve el slider
+            sliderContraoferta.addEventListener('input', function() {
+                const valor = parseFloat(this.value);
+                valorContraoferta.textContent = valor.toFixed(2);
+            });
+
+            // Temporizador
+            const intervalo = setInterval(function() {
+                tiempoRestante--;
+                contadorTiempo.textContent = tiempoRestante + 's';
+                
+                if (tiempoRestante <= 0) {
+                    clearInterval(intervalo);
+                    alert('Tiempo agotado. La propuesta ha expirado.');
+                }
+            }, 1000);
+
+            // Efectos visuales para los botones
+            btnContraoferta.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                    const contraoferta = parseFloat(sliderContraoferta.value);
+                    alert(`Contraoferta enviada: S/. ${contraoferta.toFixed(2)}`);
+                    clearInterval(intervalo);
+                }, 200);
+            });
+
+            btnAceptar.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                    alert('Propuesta del pasajero aceptada: S/. 35.00');
+                    clearInterval(intervalo);
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>

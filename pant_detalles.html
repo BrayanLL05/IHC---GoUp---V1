@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GoUp - Detalles del Viaje</title>
+  <link rel="stylesheet" href="styles_detalles.css"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header-app">
+    <button class="boton-atras">
+      <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24" /></a>
+    </button>
+    <h1 class="titulo-app">GoUp</h1>
+    <div class="icono-perfil">
+      <a href="pant_historial_P.html"><img src="iconos/perfil.ico" alt="Perfil" width="28" height="28" /></a>
+    </div>
+  </header>
+
+  <!-- Mapa -->
+  <div class="contenedor-mapa">
+    <div class="mapa-fondo"></div>
+
+    <div class="contenedor-principal">
+      <div class="panel-detalles">
+        <h2 class="titulo-detalles">Detalles del viaje</h2>
+
+        <div class="info-conductor">
+          <div class="conductor-principal">
+            <div class="nombre-conductor">Carlos M.</div>
+            <div class="vehiculo">Toyota Corolla</div>
+          </div>
+          <div class="calificacion">
+            <img src="iconos/star.ico" alt="Estrella" class="estrella" />
+            <img src="iconos/star.ico" alt="Estrella" class="estrella" />
+            <img src="iconos/star.ico" alt="Estrella" class="estrella" />
+            <img src="iconos/star.ico" alt="Estrella" class="estrella" />
+            <img src="iconos/media_star.ico" alt="Media Estrella" class="estrella" />
+          </div>
+        </div>
+
+        <div class="detalles-viaje">
+          <div class="detalle">
+            <span class="etiqueta-detalle">Origen:</span>
+            <span class="valor-detalle">Av. Lecaros #171 - Puente Piedra</span>
+          </div>
+          <div class="detalle">
+            <span class="etiqueta-detalle">Destino:</span>
+            <span class="valor-detalle">Av. Trinidad #200 - Pro</span>
+          </div>
+          <div class="detalle">
+            <span class="etiqueta-detalle">Tiempo Estimado:</span>
+            <span class="valor-detalle">45 minutos (17.2 km)</span>
+          </div>
+        </div>
+
+        <div class="acciones-viaje">
+          <button class="boton-accion boton-resena" id="btn-resena">Dejar una Reseña y Calificar</button>
+          <button class="boton-accion boton-pagar" id="btn-pagar">Pagar Viaje</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Reseña -->
+  <div class="modal-overlay" id="modal-resena">
+    <div class="modal-resena">
+      <div class="modal-header">
+        <h3>Perfil de conductor (Reseñas)</h3>
+        <button class="btn-cerrar" id="cerrar-resena">
+          <img src="iconos/salir.ico" alt="Cerrar" width="20" height="20" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="perfil-conductor">
+          <div class="foto-conductor">
+            <img src="img/foto1.jpg" alt="Carlos Mendoza" class="imagen-perfil" />
+          </div>
+          <div class="info-perfil">
+            <h4>Carlos Mendoza</h4>
+            <p>Experiencia: 2 años y 3 meses</p>
+            <div class="calificacion-perfil">
+              <span>Calificación:</span>
+              <div class="estrellas-perfil">
+                <img src="iconos/star.ico" alt="Estrella" class="estrella-perfil" />
+                <img src="iconos/star.ico" alt="Estrella" class="estrella-perfil" />
+                <img src="iconos/star.ico" alt="Estrella" class="estrella-perfil" />
+                <img src="iconos/star.ico" alt="Estrella" class="estrella-perfil" />
+                <img src="iconos/media_star.ico" alt="Media Estrella" class="estrella-perfil" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="filtro-resenas">
+          <select id="filtro-resenas" class="form-control">
+            <option value="todas">Filtrar reseñas</option>
+            <option value="recientes">Más recientes</option>
+            <option value="antiguas">Más antiguas</option>
+            <option value="mejor">Mejor calificadas</option>
+          </select>
+        </div>
+
+        <div class="lista-resenas">
+          <div class="resena-item">
+            <div class="resena-header">
+              <span class="usuario">@mariaGui</span>
+              <span class="fecha">24 - 05 - 2025</span>
+            </div>
+            <p class="resena-texto">
+              Excelente conductor, muy amable y el viaje fue muy cómodo. Llegó puntualmente al punto de recogida. El auto estaba limpio y cómodo. Manejo muy tranquilo. Solo bajé media estrella porque durante el trayecto la música estaba muy alta y no preguntó si me molestaba. Por lo demás, muy buena experiencia.
+            </p>
+          </div>
+        </div>
+
+        <button class="btn-escribir-resena" id="btn-escribir">Escribir una reseña</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Pago -->
+  <div class="modal-overlay" id="modal-pago">
+    <div class="modal-pago">
+      <div class="modal-header">
+        <h3>Método de Pago</h3>
+        <button class="btn-cerrar" id="cerrar-pago">
+          <img src="iconos/salir.ico" alt="Cerrar" width="20" height="20" />
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="descripcion-pago">Seleccione el método de pago para completar su viaje</p>
+
+        <div class="opciones-pago">
+          <button class="opcion-pago" data-metodo="tarjeta">
+            <img src="iconos/tarjeta.ico" alt="Tarjeta" class="icono-pago" />
+            <span>Tarjeta de Crédito o Débito</span>
+          </button>
+          <button class="opcion-pago" data-metodo="yape">
+            <img src="iconos/billetera.ico" alt="Yape" class="icono-pago" />
+            <span>Billetera Móvil (Yape)</span>
+          </button>
+          <button class="opcion-pago" data-metodo="efectivo">
+            <img src="iconos/efectivo.ico" alt="Efectivo" class="icono-pago" />
+            <span>Efectivo</span>
+          </button>
+        </div>
+
+        <button class="btn-confirmar-pago" id="btn-confirmar-pago" disabled>Pagar Viaje</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERTAS estilo Bootstrap -->
+  <div id="alerta-1" class="alert alert-warning alert-dismissible fade show fixed-top m-3 d-none" role="alert" style="z-index: 1050;">
+    <strong>¡Atención!</strong> El conductor se encuentra a 2 minutos.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar" onclick="cerrarAlerta('alerta-1')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div id="alerta-2" class="alert alert-info alert-dismissible fade show fixed-top m-3 d-none" role="alert" style="top: 80px; z-index: 1050;">
+    <strong>¡Aviso!</strong> El viaje ha comenzado.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar" onclick="cerrarAlerta('alerta-2')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const btnResena = document.getElementById('btn-resena');
+      const btnPagar = document.getElementById('btn-pagar');
+      const modalResena = document.getElementById('modal-resena');
+      const modalPago = document.getElementById('modal-pago');
+      const cerrarResena = document.getElementById('cerrar-resena');
+      const cerrarPago = document.getElementById('cerrar-pago');
+      const opcionesPago = document.querySelectorAll('.opcion-pago');
+      const btnConfirmarPago = document.getElementById('btn-confirmar-pago');
+      let metodoSeleccionado = null;
+
+      btnResena.addEventListener('click', () => modalResena.classList.add('visible'));
+      btnPagar.addEventListener('click', () => modalPago.classList.add('visible'));
+      cerrarResena.addEventListener('click', () => modalResena.classList.remove('visible'));
+      cerrarPago.addEventListener('click', () => {
+        modalPago.classList.remove('visible');
+        resetearSeleccionPago();
+      });
+
+      modalResena.addEventListener('click', e => { if (e.target === modalResena) modalResena.classList.remove('visible'); });
+      modalPago.addEventListener('click', e => { if (e.target === modalPago) { modalPago.classList.remove('visible'); resetearSeleccionPago(); } });
+
+      opcionesPago.forEach(opcion => {
+        opcion.addEventListener('click', function () {
+          opcionesPago.forEach(op => op.classList.remove('seleccionado'));
+          this.classList.add('seleccionado');
+          metodoSeleccionado = this.dataset.metodo;
+          btnConfirmarPago.disabled = false;
+        });
+      });
+
+      btnConfirmarPago.addEventListener('click', function () {
+        if (metodoSeleccionado) {
+          alert(`Pago confirmado con ${getMetodoNombre(metodoSeleccionado)}`);
+          modalPago.classList.remove('visible');
+          resetearSeleccionPago();
+        }
+      });
+
+      function resetearSeleccionPago() {
+        opcionesPago.forEach(op => op.classList.remove('seleccionado'));
+        metodoSeleccionado = null;
+        btnConfirmarPago.disabled = true;
+      }
+
+      function getMetodoNombre(metodo) {
+        const nombres = {
+          'tarjeta': 'Tarjeta de Crédito o Débito',
+          'yape': 'Billetera Móvil (Yape)',
+          'efectivo': 'Efectivo'
+        };
+        return nombres[metodo] || metodo;
+      }
+
+      document.getElementById('btn-escribir').addEventListener('click', () => {
+        alert('Funcionalidad de escribir reseña próximamente...');
+      });
+    });
+
+    function vibrarPagina() {
+      document.body.classList.add("vibrando");
+      setTimeout(() => {
+        document.body.classList.remove("vibrando");
+      }, 2000);
+    }
+
+    setTimeout(() => {
+      const alerta1 = document.getElementById("alerta-1");
+      alerta1.classList.remove("d-none");
+      vibrarPagina();
+    }, 20000);
+
+    setTimeout(() => {
+      const alerta2 = document.getElementById("alerta-2");
+      alerta2.classList.remove("d-none");
+      vibrarPagina();
+    }, 50000);
+
+    function cerrarAlerta(id) {
+      const alerta = document.getElementById(id);
+      alerta.classList.add("d-none");
+    }
+  </script>
+</body>
+</html>

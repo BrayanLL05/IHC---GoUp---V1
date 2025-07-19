@@ -1,0 +1,362 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+/* HEADER DE LA APLICACIÓN */
+.header-app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  position: relative;
+}
+
+.boton-atras {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.boton-atras:hover {
+  background-color: rgba(44, 62, 80, 0.1);
+  transform: scale(1.1);
+}
+
+.boton-atras a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-app {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  flex: 1;
+  text-align: center;
+}
+
+.icono-perfil {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background-color: rgba(44, 62, 80, 0.1);
+}
+
+.icono-perfil:hover {
+  background-color: rgba(44, 62, 80, 0.2);
+  transform: scale(1.1);
+}
+
+/* ÁREA DEL MAPA */
+.contenedor-mapa {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapa-fondo {
+  background-image: url("img/mapa_goup.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor-principal {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+}
+
+/* PANEL DE HISTORIAL */
+.panel-historial-P {
+  background-color: rgba(74, 155, 142, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  animation: aparecer 0.5s ease-out;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+/* HEADER DEL HISTORIAL */
+.header-historial {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.titulo-historial {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.btn-cerrar-historial {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-cerrar-historial:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* DESCRIPCIÓN */
+.descripcion-historial {
+  font-size: 13px;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* LISTA DE VIAJES */
+.lista-viajes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.viaje-item {
+  background-color: rgba(50, 108, 98, 0.9);
+  border-radius: 10px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.viaje-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.viaje-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pasajero-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
+}
+
+.icono-pasajero {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+.pasajero-datos {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.pasajero-nombre {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.2;
+}
+
+.viaje-ruta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.origen,
+.destino {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
+}
+
+.btn-ver-mas {
+  background-color: white;
+  color: #2c3e50;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-ver-mas:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.05);
+}
+
+.btn-ver-mas:active {
+  transform: scale(0.95);
+}
+
+/* SCROLLBAR PERSONALIZADA */
+.panel-historial-P::-webkit-scrollbar {
+  width: 6px;
+}
+
+.panel-historial-P::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.panel-historial-P::-webkit-scrollbar-thumb {
+  background: rgba(44, 62, 80, 0.5);
+  border-radius: 3px;
+}
+
+.panel-historial-P::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 62, 80, 0.7);
+}
+
+/* ANIMACIONES */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* DISEÑO RESPONSIVO */
+@media (max-width: 768px) {
+  .panel-historial-P {
+    padding: 18px;
+    max-width: 350px;
+  }
+
+  .titulo-historial {
+    font-size: 16px;
+  }
+
+  .descripcion-historial {
+    font-size: 12px;
+  }
+
+  .pasajero-nombre {
+    font-size: 12px;
+  }
+
+  .origen,
+  .destino {
+    font-size: 10px;
+  }
+
+  .btn-ver-mas {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+
+  .icono-pasajero {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel-historial-P {
+    padding: 15px;
+    max-width: 320px;
+  }
+
+  .titulo-historial {
+    font-size: 15px;
+  }
+
+  .descripcion-historial {
+    font-size: 11px;
+  }
+
+  .viaje-item {
+    padding: 12px;
+  }
+
+  .pasajero-info {
+    gap: 8px;
+  }
+
+  .pasajero-nombre {
+    font-size: 11px;
+  }
+
+  .origen,
+  .destino {
+    font-size: 9px;
+  }
+
+  .btn-ver-mas {
+    padding: 4px 8px;
+    font-size: 9px;
+  }
+
+  .icono-pasajero {
+    width: 22px;
+    height: 22px;
+  }
+}

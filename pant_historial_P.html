@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Historial del Pasajero</title>
+    <link rel="stylesheet" href="styles_histo_P.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <div class="contenedor-principal">
+            <!-- Panel de historial -->
+            <div class="panel-historial-P">
+                <!-- Header del historial -->
+                <div class="header-historial">
+                    <h2 class="titulo-historial">Historial de Viajes</h2>
+                    <button class="btn-cerrar-historial" id="cerrar-historial">
+                        <img src="iconos/salir.ico" alt="Cerrar" width="20" height="20">
+                    </button>
+                </div>
+                
+                <!-- Descripción -->
+                <p class="descripcion-historial">
+                    Puede verificar el historial de los viajes que hizo.
+                </p>
+                
+                <!-- Lista de viajes -->
+                <div class="lista-viajes">
+                    <!-- Viaje 1 -->
+                    <div class="viaje-item">
+                        <div class="viaje-header">
+                            <div class="conductor-info">
+                                <img src="iconos/perfil.ico" alt="Conductor" class="icono-conductor">
+                                <div class="conductor-datos">
+                                    <span class="conductor-nombre">Conductor: Carlos Mendoza - S/. 35.00</span>
+                                    <div class="viaje-ruta">
+                                        <span class="origen">Pte. Piedra - Av. Lecaros #171</span>
+                                        <span class="destino">Pro - Av. Trinidad</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-ver-mas" data-viaje="1">Ver más</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Viaje 2 -->
+                    <div class="viaje-item">
+                        <div class="viaje-header">
+                            <div class="conductor-info">
+                                <img src="iconos/perfil.ico" alt="Conductor" class="icono-conductor">
+                                <div class="conductor-datos">
+                                    <span class="conductor-nombre">Conductor: Harold Pérez - S/. 30.00</span>
+                                    <div class="viaje-ruta">
+                                        <span class="origen">Pte. Piedra - Av. Lecaros #171</span>
+                                        <span class="destino">Los Olivos - Jr. 6 de junio #332</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-ver-mas" data-viaje="2">Ver más</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Viaje 3 -->
+                    <div class="viaje-item">
+                        <div class="viaje-header">
+                            <div class="conductor-info">
+                                <img src="iconos/perfil.ico" alt="Conductor" class="icono-conductor">
+                                <div class="conductor-datos">
+                                    <span class="conductor-nombre">Conductor: José Loayza - S/. 44.00</span>
+                                    <div class="viaje-ruta">
+                                        <span class="origen">Pro - Av. Santa María #8</span>
+                                        <span class="destino">Jesús María - Jr. Loreto #112</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-ver-mas" data-viaje="3">Ver más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const cerrarHistorial = document.getElementById('cerrar-historial');
+            const botonesVerMas = document.querySelectorAll('.btn-ver-mas');
+            
+            // Cerrar historial
+            cerrarHistorial.addEventListener('click', function() {
+                // Aquí puedes agregar la lógica para cerrar o regresar
+                window.history.back();
+            });
+            
+            // Botones "Ver más"
+            botonesVerMas.forEach(boton => {
+                boton.addEventListener('click', function() {
+                    const viajeId = this.dataset.viaje;
+                    const conductorNombre = this.closest('.viaje-item').querySelector('.conductor-nombre').textContent;
+                    
+                    // Efecto visual
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                    
+                    // Mostrar detalles del viaje
+                    alert(`Mostrando detalles del viaje con ${conductorNombre.split(':')[1].split(' - ')[0]}`);
+                    
+                    // Aquí puedes redirigir a una página de detalles específica
+                    // window.location.href = `detalles-viaje.html?id=${viajeId}`;
+                });
+            });
+            
+            // Efectos hover para los items de viaje
+            const viajesItems = document.querySelectorAll('.viaje-item');
+            viajesItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

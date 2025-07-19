@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Registro de Pasajero</title>
+    <link rel="stylesheet" href="styles_registro_pasaj.css">
+</head>
+<body>
+    <div class="contenedor-registro">
+        <h1 class="titulo">Registrarse</h1>
+        <p class="subtitulo">Como Pasajero ...</p>
+
+        <form class="formulario-registro">
+            <input type="text" placeholder="Nombre(s)" required>
+            <input type="text" placeholder="Apellidos" required>
+            <input type="email" placeholder="Correo" required>
+            <input type="text" placeholder="DNI" required>
+            <input type="tel" placeholder="Nro. Teléfono" required>
+            <button type="button" class="boton boton-primario" id="boton-pago">Ingresar Datos del Método de Pago</button>
+            <input type="password" placeholder="Contraseña" required>
+
+            <button type="submit" class="boton boton-primario">Registrar Pasajero</button>
+        </form>
+    </div>
+
+    <!-- Modal para método de pago -->
+    <div id="modal-pago" class="modal-overlay">
+        <div class="modal-contenido">
+            <h2 class="modal-titulo">Método de Pago</h2>
+            
+            <!-- Pestañas de métodos de pago -->
+            <div class="pestanas-pago">
+                <button type="button" class="pestana activa" data-metodo="tarjeta">Tarjeta</button>
+                <button type="button" class="pestana" data-metodo="yape">Yape</button>
+                <button type="button" class="pestana" data-metodo="efectivo">Efectivo</button>
+            </div>
+            
+            <form class="formulario-pago">
+                <!-- Contenido para Tarjeta -->
+                <div id="contenido-tarjeta" class="contenido-metodo activo">
+                    <div class="campo-grupo">
+                        <label for="titular">Titular:</label>
+                        <input type="text" id="titular" name="titular" required>
+                    </div>
+                    
+                    <div class="campo-grupo">
+                        <label for="numero-tarjeta">Nro. Tarjeta:</label>
+                        <input type="text" id="numero-tarjeta" name="numero-tarjeta" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                    </div>
+                    
+                    <div class="campo-grupo">
+                        <label for="fecha-vencimiento">Fecha Vencimiento:</label>
+                        <div class="fecha-contenedor">
+                            <input type="text" id="fecha-vencimiento" name="fecha-vencimiento" placeholder="MM/AA" maxlength="5" required>
+                            <span class="icono-calendario">📅</span>
+                        </div>
+                    </div>
+                    
+                    <div class="campo-grupo">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" maxlength="4" required>
+                    </div>
+                </div>
+
+                <!-- Contenido para Yape -->
+                <div id="contenido-yape" class="contenido-metodo">
+                    <div class="campo-grupo">
+                        <label for="telefono-yape">Número de Teléfono:</label>
+                        <input type="tel" id="telefono-yape" name="telefono-yape" placeholder="+51 999 999 999" required>
+                    </div>
+                    
+                    <div class="info-yape">
+                        <p>📱 Asegúrate de que tu número esté registrado en Yape</p>
+                    </div>
+                </div>
+
+                <!-- Contenido para Efectivo -->
+                <div id="contenido-efectivo" class="contenido-metodo">
+                    <div class="info-efectivo">
+                        <p>💵 Pagarás en efectivo al conductor</p>
+                        <p>Asegúrate de tener el monto exacto</p>
+                    </div>
+                </div>
+                
+                <div class="botones-modal">
+                    <button type="button" class="boton boton-secundario" id="boton-volver-pago">Volver</button>
+                    <button type="submit" class="boton boton-primario">Registrar M. de Pago</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonPago = document.getElementById('boton-pago');
+            const modalPago = document.getElementById('modal-pago');
+            const botonVolver = document.getElementById('boton-volver-pago');
+            const formularioPago = document.querySelector('.formulario-pago');
+            const pestanas = document.querySelectorAll('.pestana');
+            const contenidosMetodo = document.querySelectorAll('.contenido-metodo');
+            
+            // Abrir modal
+            botonPago.addEventListener('click', function() {
+                modalPago.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Cerrar modal
+            botonVolver.addEventListener('click', function() {
+                modalPago.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Cerrar modal al hacer clic fuera
+            modalPago.addEventListener('click', function(e) {
+                if (e.target === modalPago) {
+                    modalPago.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Manejar pestañas
+            pestanas.forEach(pestana => {
+                pestana.addEventListener('click', function() {
+                    const metodo = this.getAttribute('data-metodo');
+                    
+                    // Remover clase activa de todas las pestañas
+                    pestanas.forEach(p => p.classList.remove('activa'));
+                    contenidosMetodo.forEach(c => c.classList.remove('activo'));
+                    
+                    // Agregar clase activa a la pestaña seleccionada
+                    this.classList.add('activa');
+                    document.getElementById(`contenido-${metodo}`).classList.add('activo');
+                });
+            });
+            
+            // Formatear número de tarjeta
+            const numeroTarjeta = document.getElementById('numero-tarjeta');
+            numeroTarjeta.addEventListener('input', function(e) {
+                let valor = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+                let valorFormateado = valor.match(/.{1,4}/g)?.join(' ') || valor;
+                e.target.value = valorFormateado;
+            });
+            
+            // Formatear fecha de vencimiento
+            const fechaVencimiento = document.getElementById('fecha-vencimiento');
+            fechaVencimiento.addEventListener('input', function(e) {
+                let valor = e.target.value.replace(/\D/g, '');
+                if (valor.length >= 2) {
+                    valor = valor.substring(0, 2) + '/' + valor.substring(2, 4);
+                }
+                e.target.value = valor;
+            });
+            
+            // Solo números en CVV
+            const cvv = document.getElementById('cvv');
+            cvv.addEventListener('input', function(e) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+            
+            // Manejar envío del formulario
+            formularioPago.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const metodoActivo = document.querySelector('.pestana.activa').getAttribute('data-metodo');
+                alert(`Método de pago (${metodoActivo}) registrado correctamente`);
+                modalPago.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>

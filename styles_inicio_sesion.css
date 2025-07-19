@@ -1,0 +1,343 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    /* Centrado perfecto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    
+    /* Asegurar que siempre esté centrado */
+    position: relative;
+}
+
+.contenedor-principal {
+    background: linear-gradient(135deg, #4a9b8e, #6bb6a8);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    color: #2c3e50;
+    
+    /* Centrado adicional por si acaso */
+    margin: auto;
+    
+    /* Evitar que se salga de la pantalla */
+    position: relative;
+    z-index: 1;
+}
+
+.titulo-sesion {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.subtitulo {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.formulario-sesion {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.grupo-campo {
+    width: 100%;
+    text-align: left;
+}
+
+.etiqueta-campo {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.campo-entrada {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #2c3e50;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.campo-entrada:focus {
+    outline: none;
+    border-color: #1a252f;
+    box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.2);
+}
+
+.boton {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.boton-primario {
+    background-color: white;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+}
+
+.boton-primario:hover {
+    background-color: #2c3e50;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+}
+
+.boton-secundario {
+    background-color: white;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+    margin-top: 15px;
+}
+
+.boton-secundario:hover {
+    background-color: rgba(44, 62, 80, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 62, 80, 0.2);
+}
+
+.enlace-olvidado {
+    display: block;
+    margin: 20px 0;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.enlace-olvidado:hover {
+    text-decoration: underline;
+}
+
+.separador {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+.separador-circulo {
+    width: 8px;
+    height: 8px;
+    background-color: #2c3e50;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.contenedor-contacto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 10px;
+}
+
+.icono-contacto {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.boton-contacto {
+    background-color: white;
+    color: #2c3e50;
+    border: 2px solid #2c3e50;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-contacto:hover {
+    background-color: #2c3e50;
+    color: white;
+}
+
+/* Diseño Responsivo - Móvil */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    .contenedor-principal {
+        padding: 30px 25px;
+        max-width: 350px;
+    }
+
+    .titulo-sesion {
+        font-size: 24px;
+    }
+
+    .subtitulo {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .campo-entrada {
+        padding: 10px 12px;
+        font-size: 15px;
+    }
+
+    .boton {
+        padding: 12px 25px;
+        font-size: 15px;
+    }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .contenedor-principal {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+
+    .titulo-sesion {
+        font-size: 22px;
+    }
+
+    .subtitulo {
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .formulario-sesion {
+        gap: 15px;
+    }
+
+    .campo-entrada {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .boton {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Escritorio */
+@media (min-width: 1024px) {
+    .contenedor-principal {
+        max-width: 450px;
+        padding: 50px 40px;
+    }
+
+    .titulo-sesion {
+        font-size: 30px;
+    }
+
+    .subtitulo {
+        font-size: 18px;
+        margin-bottom: 35px;
+    }
+
+    .campo-entrada {
+        padding: 14px 18px;
+        font-size: 17px;
+    }
+
+    .boton {
+        padding: 16px 35px;
+        font-size: 17px;
+        max-width: 220px;
+    }
+}
+
+/* Animaciones */
+@keyframes aparecerDesdeAbajo {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contenedor-principal {
+    animation: aparecerDesdeAbajo 0.8s ease-out;
+}
+
+.formulario-sesion > * {
+    animation: aparecerDesdeAbajo 0.8s ease-out;
+}
+
+.formulario-sesion > *:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.formulario-sesion > *:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.formulario-sesion > *:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.enlace-olvidado {
+    animation: aparecerDesdeAbajo 0.8s ease-out;
+    animation-delay: 0.4s;
+}
+
+.boton-secundario {
+    animation: aparecerDesdeAbajo 0.8s ease-out;
+    animation-delay: 0.5s;
+}
+
+.contenedor-contacto {
+    animation: aparecerDesdeAbajo 0.8s ease-out;
+    animation-delay: 0.6s;
+}

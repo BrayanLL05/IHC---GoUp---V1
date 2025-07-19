@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Historial del Conductor</title>
+    <link rel="stylesheet" href="styles_histo_C.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <div class="contenedor-principal">
+            <!-- Panel de historial -->
+            <div class="panel-historial-P">
+                <!-- Header del historial -->
+                <div class="header-historial">
+                    <h2 class="titulo-historial">Historial de Viajes</h2>
+                    <button class="btn-cerrar-historial" id="cerrar-historial">
+                        <img src="iconos/salir.ico" alt="Cerrar" width="20" height="20">
+                    </button>
+                </div>
+                
+                <!-- Descripción -->
+                <p class="descripcion-historial">
+                    Puede verificar el historial de los viajes que realizó.
+                </p>
+                
+                <!-- Lista de viajes -->
+                <div class="lista-viajes">
+                    <!-- Viaje 1 -->
+                    <div class="viaje-item">
+                        <div class="viaje-header">
+                            <div class="pasajero-info">
+                                <img src="iconos/perfil.ico" alt="Pasajero" class="icono-pasajero">
+                                <div class="pasajero-datos">
+                                    <span class="pasajero-nombre">Pasajero(a): María Gutierrez - S/. 35.00</span>
+                                    <div class="viaje-ruta">
+                                        <span class="origen">Pte. Piedra - Av. Lecaros #171</span>
+                                        <span class="destino">Pro - Av. Trinidad #200</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-ver-mas" data-viaje="1">Ver más</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Viaje 2 -->
+                    <div class="viaje-item">
+                        <div class="viaje-header">
+                            <div class="pasajero-info">
+                                <img src="iconos/perfil.ico" alt="Pasajero" class="icono-pasajero">
+                                <div class="pasajero-datos">
+                                    <span class="pasajero-nombre">Pasajero(a): Jeison Martinez - S/. 42.00</span>
+                                    <div class="viaje-ruta">
+                                        <span class="origen">Pte. Piedra - Av. Santa Rosa #330</span>
+                                        <span class="destino">Independencia - Av. Junín #104</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-ver-mas" data-viaje="2">Ver más</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Viaje 3 -->
+                    <div class="viaje-item">
+                        <div class="viaje-header">
+                            <div class="pasajero-info">
+                                <img src="iconos/perfil.ico" alt="Pasajero" class="icono-pasajero">
+                                <div class="pasajero-datos">
+                                    <span class="pasajero-nombre">Pasajero(a): Javier Arteaga - S/. 25.00</span>
+                                    <div class="viaje-ruta">
+                                        <span class="origen">Los Olivos - Jr. 1ero de mayo</span>
+                                        <span class="destino">San Martín de Porres - Jr. José Olaya #236</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-ver-mas" data-viaje="3">Ver más</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos del DOM
+            const cerrarHistorial = document.getElementById('cerrar-historial');
+            const botonesVerMas = document.querySelectorAll('.btn-ver-mas');
+            
+            // Cerrar historial
+            cerrarHistorial.addEventListener('click', function() {
+                // Aquí puedes agregar la lógica para cerrar o regresar
+                window.history.back();
+            });
+            
+            // Efectos hover para los items de viaje
+            const viajesItems = document.querySelectorAll('.viaje-item');
+            viajesItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

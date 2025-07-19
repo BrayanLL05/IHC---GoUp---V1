@@ -1,0 +1,634 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+/* HEADER DE LA APLICACIÓN */
+.header-app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  position: relative;
+}
+
+.boton-atras {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.boton-atras:hover {
+  background-color: rgba(44, 62, 80, 0.1);
+  transform: scale(1.1);
+}
+
+.boton-atras a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-app {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  flex: 1;
+  text-align: center;
+}
+
+.icono-perfil {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background-color: rgba(44, 62, 80, 0.1);
+}
+
+.icono-perfil:hover {
+  background-color: rgba(44, 62, 80, 0.2);
+  transform: scale(1.1);
+}
+
+/* ÁREA DEL MAPA */
+.contenedor-mapa {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapa-fondo {
+  background-image: url("img/mapa_goup.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.contenedor-principal {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+}
+
+/* PANEL DE DETALLES DEL VIAJE */
+.panel-detalles {
+  background-color: rgba(74, 155, 142, 0.9);
+  border-radius: 15px;
+  padding: 25px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  animation: aparecer 0.5s ease-out;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.titulo-detalles {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* INFORMACIÓN DEL CONDUCTOR */
+.info-conductor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.conductor-principal {
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre-conductor {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.vehiculo {
+  font-size: 14px;
+  color: #34495e;
+  margin-top: 2px;
+}
+
+.calificacion {
+  display: flex;
+  gap: 3px;
+}
+
+.estrella {
+  width: 16px;
+  height: 16px;
+}
+
+/* DETALLES DEL VIAJE */
+.detalles-viaje {
+  margin-bottom: 20px;
+}
+
+.detalle {
+  margin-bottom: 10px;
+}
+
+.detalle:last-child {
+  margin-bottom: 0;
+}
+
+.etiqueta-detalle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  display: block;
+}
+
+.valor-detalle {
+  font-size: 14px;
+  color: #34495e;
+  line-height: 1.4;
+}
+
+/* BOTONES DE ACCIÓN */
+.acciones-viaje {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.boton-accion {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-align: center;
+  background-color: #2c3e50;
+  color: white;
+}
+
+.boton-accion:hover {
+  background-color: #1a252f;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(44, 62, 80, 0.4);
+}
+
+.boton-accion:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* MODALES */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-resena,
+.modal-pago {
+  background-color: rgba(74, 155, 142, 0.9);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: aparecerModal 0.4s ease-out;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.btn-cerrar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-cerrar:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+/* MODAL DE RESEÑAS */
+.perfil-conductor {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.foto-conductor {
+  flex-shrink: 0;
+}
+
+.imagen-perfil {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.info-perfil h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.info-perfil p {
+  font-size: 12px;
+  color: #34495e;
+  margin-bottom: 8px;
+}
+
+.calificacion-perfil {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.estrellas-perfil {
+  display: flex;
+  gap: 2px;
+}
+
+.estrella-perfil {
+  width: 14px;
+  height: 14px;
+}
+
+.filtro-resenas {
+  margin-bottom: 15px;
+}
+
+.filtro-resenas select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.lista-resenas {
+  margin-bottom: 15px;
+}
+
+.resena-item {
+  background-color: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+
+.resena-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.usuario {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+.fecha {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.resena-texto {
+  font-size: 12px;
+  color: #34495e;
+  line-height: 1.4;
+}
+
+.btn-escribir-resena {
+  width: 100%;
+  padding: 10px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-escribir-resena:hover {
+  background-color: #1a252f;
+}
+
+/* MODAL DE PAGO */
+.descripcion-pago {
+  text-align: center;
+  font-size: 14px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.opciones-pago {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.opcion-pago {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.opcion-pago:hover {
+  background-color: #1a252f;
+}
+
+.opcion-pago.seleccionado {
+  background-color: #27ae60;
+  transform: scale(1.02);
+}
+
+.icono-pago {
+  width: 24px;
+  height: 24px;
+}
+
+.btn-confirmar-pago {
+  width: 100%;
+  padding: 12px;
+  background-color: white;
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-confirmar-pago:hover:not(:disabled) {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.btn-confirmar-pago:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ANIMACIONES */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aparecerModal {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* DISEÑO RESPONSIVO */
+@media (max-width: 768px) {
+  .panel-detalles {
+    padding: 20px;
+  }
+
+  .titulo-detalles {
+    font-size: 18px;
+  }
+
+  .nombre-conductor {
+    font-size: 15px;
+  }
+
+  .vehiculo {
+    font-size: 13px;
+  }
+
+  .estrella {
+    width: 14px;
+    height: 14px;
+  }
+
+  .etiqueta-detalle,
+  .valor-detalle {
+    font-size: 13px;
+  }
+
+  .boton-accion {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .modal-resena,
+  .modal-pago {
+    width: 95%;
+  }
+
+  .imagen-perfil {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .panel-detalles {
+    padding: 15px;
+    max-width: 320px;
+  }
+
+  .titulo-detalles {
+    font-size: 16px;
+  }
+
+  .nombre-conductor {
+    font-size: 14px;
+  }
+
+  .vehiculo {
+    font-size: 12px;
+  }
+
+  .estrella {
+    width: 12px;
+    height: 12px;
+  }
+
+  .etiqueta-detalle,
+  .valor-detalle {
+    font-size: 12px;
+  }
+
+  .boton-accion {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  .perfil-conductor {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .imagen-perfil {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+
+@keyframes vibrar {
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -2px); }
+  50% { transform: translate(-2px, 2px); }
+  75% { transform: translate(2px, 2px); }
+  100% { transform: translate(0); }
+}
+
+.vibrando {
+  animation: vibrar 0.5s ease-in-out 4;
+}
+
+.modal-alerta {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #00d092cc;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  text-align: center;
+  font-size: 16px;
+  color: #222;
+  display: none;
+  width: 90%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.cerrar-alerta {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Buscar Viaje</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="styles_pant_prin.css">
+</head>
+<body>
+    <!-- Header de la aplicación -->
+    <header class="header-app">
+        <button class="boton-atras">
+            <a href="inicio_sesion.html"><img src="iconos/atras.ico" alt="Atrás" width="24" height="24"></a>
+        </button>
+        <h1 class="titulo-app">GoUp</h1>
+        <div class="icono-perfil">
+            <img src="iconos/perfil.ico" alt="Perfil" width="28" height="28">
+        </div>
+    </header>
+
+    <!-- Barra de búsqueda -->
+    <div class="contenedor-busqueda">
+        <div class="barra-busqueda">
+            <img src="iconos/lupa.ico" alt="Buscar" class="icono-buscar" width="20" height="20">
+            <input type="text" placeholder="Buscar destino" class="campo-busqueda">
+        </div>
+    </div>
+
+    <!-- Área del mapa -->
+    <div class="contenedor-mapa">
+        <div class="mapa-fondo"></div>
+        
+        <!-- Bot flotante -->
+        <div class="bot-contenedor">
+            <div class="bot-icono">
+                <img src="iconos/bot.ico" alt="Bot de GoUp" class="icono-bot">
+            </div>
+            <div class="globo-dialogo">
+                <div class="globo-contenido">
+                    <div class="pregunta-principal">
+                        ¿Cuántas personas viajarán?
+                    </div>
+                    
+                    <div class="campo-cantidad">
+                        <label for="cantidad-personas">Ingrese cantidad:</label>
+                        <div class="input-cantidad">
+                            <input type="number" id="cantidad-personas" value="2" min="1" max="8">
+                            <div class="flechas-cantidad">
+                                <button type="button" class="flecha-arriba">▲</button>
+                                <button type="button" class="flecha-abajo">▼</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="consulta-adicional">
+                        <p>¿Alguna otra consulta?</p>
+                        <a href="#" class="enlace-dudas">Presióname para resolver tus dudas</a>
+                    </div>
+                </div>
+                <div class="globo-flecha"></div>
+            </div>
+        </div>
+
+        <!-- Marcadores de ubicación en el mapa -->
+        <div class="marcador marcador-1">
+            <div class="pin-ubicacion">📍</div>
+        </div>
+    </div>
+
+    <!-- Panel inferior -->
+    <div class="panel-inferior">
+        <div class="contenido-panel">
+            <button class="boton-conductores">Conductores Cercanos</button>
+        </div>
+    </div>
+
+    <!-- Panel de conductores cercanos (oculto por defecto) -->
+    <div class="panel-conductores" id="panel-conductores">
+        <div class="header-conductores">
+            <h3>Conductores Cercanos</h3>
+            <button class="cerrar-conductores">&times;</button>
+        </div>
+        
+        <div class="container lista-conductores">
+        <div class="row">
+            <!-- Conductor 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="tarjeta-conductor">
+                    <div class="foto-conductor">
+                    <img src="img/foto1.jpg" alt="Carlos Mendoza">
+                    </div>
+                    <div class="info-conductor">
+                    <div class="nombre-conductor">Carlos Mendoza</div>
+                    <div class="detalles-conductor">
+                        <span>Distancia: 1km</span>
+                        <span>Tarifa: S/ 42.00</span>
+                    </div>
+                    </div>
+                    <div class="acciones-conductor">
+                    <button class="boton-ver-perfil" onclick="window.location.href='perfiles.html?conductor=1'">Ver Perfil</button>
+                    <a href="pant_solicitud_P.html"><button class="boton-solicitar">Solicitar</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conductor 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="tarjeta-conductor">
+                    <div class="foto-conductor">
+                    <img src="img/foto2.jpg" alt="Fernando Díaz">
+                    </div>
+                    <div class="info-conductor">
+                    <div class="nombre-conductor">Fernando Díaz</div>
+                    <div class="detalles-conductor">
+                        <span>Distancia: 3km</span>
+                        <span>Tarifa: S/ 40.00</span>
+                    </div>
+                    </div>
+                    <div class="acciones-conductor">
+                    <button class="boton-ver-perfil" onclick="window.location.href='perfiles.html?conductor=2'">Ver Perfil</button>
+                    <a href="pant_solicitud_P.html"><button class="boton-solicitar">Solicitar</button></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conductor 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="tarjeta-conductor">
+                    <div class="foto-conductor">
+                    <img src="img/foto3.jpeg" alt="Joshua Miranda">
+                    </div>
+                    <div class="info-conductor">
+                    <div class="nombre-conductor">Joshua Miranda</div>
+                    <div class="detalles-conductor">
+                        <span>Distancia: 2km</span>
+                        <span>Tarifa: S/ 41.00</span>
+                    </div>
+                    </div>
+                    <div class="acciones-conductor">
+                    <button class="boton-ver-perfil" onclick="window.location.href='perfiles.html?conductor=3'">Ver Perfil</button>
+                    <a href="pant_solicitud_P.html"><button class="boton-solicitar">Solicitar</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonAtras = document.querySelector('.boton-atras');
+            const campoBusqueda = document.querySelector('.campo-busqueda');
+            const botIcono = document.querySelector('.bot-icono');
+            const globoDialogo = document.querySelector('.globo-dialogo');
+            const botonConductores = document.querySelector('.boton-conductores');
+            const panelConductores = document.getElementById('panel-conductores');
+            const cerrarConductores = document.querySelector('.cerrar-conductores');
+            const cantidadPersonas = document.getElementById('cantidad-personas');
+            const flechaArriba = document.querySelector('.flecha-arriba');
+            const flechaAbajo = document.querySelector('.flecha-abajo');
+            const enlaceDudas = document.querySelector('.enlace-dudas');
+            const iconoPerfil = document.querySelector('.icono-perfil');
+            const botonesVerPerfil = document.querySelectorAll('.boton-ver-perfil');
+            const botonesSolicitar = document.querySelectorAll('.boton-solicitar');
+            const modalesPerfiles = document.querySelectorAll('.modal-perfil');
+            const botonesCerrarModal = document.querySelectorAll('.cerrar-modal');
+            
+            // Funcionalidad del botón atrás
+            botonAtras.addEventListener('click', function() {
+                console.log('Regresando a la pantalla anterior');
+            });
+            
+            // Funcionalidad de búsqueda
+            campoBusqueda.addEventListener('focus', function() {
+                this.parentElement.classList.add('enfocado');
+            });
+            
+            campoBusqueda.addEventListener('blur', function() {
+                this.parentElement.classList.remove('enfocado');
+            });
+            
+            campoBusqueda.addEventListener('input', function() {
+                console.log('Buscando:', this.value);
+            });
+            
+            // Interacción con el bot
+            botIcono.addEventListener('click', function() {
+                globoDialogo.classList.toggle('visible');
+                console.log('Bot clickeado - Globo toggled');
+            });
+            
+            // Control de cantidad de personas
+            flechaArriba.addEventListener('click', function() {
+                let valor = parseInt(cantidadPersonas.value);
+                if (valor < 8) {
+                    cantidadPersonas.value = valor + 1;
+                }
+                console.log('Cantidad actualizada:', cantidadPersonas.value);
+            });
+            
+            flechaAbajo.addEventListener('click', function() {
+                let valor = parseInt(cantidadPersonas.value);
+                if (valor > 1) {
+                    cantidadPersonas.value = valor - 1;
+                }
+                console.log('Cantidad actualizada:', cantidadPersonas.value);
+            });
+            
+            // Validar input de cantidad
+            cantidadPersonas.addEventListener('input', function() {
+                let valor = parseInt(this.value);
+                if (valor < 1) this.value = 1;
+                if (valor > 8) this.value = 8;
+                console.log('Cantidad de personas:', this.value);
+            });
+            
+            // Enlace de dudas
+            enlaceDudas.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Redirigiendo a centro de ayuda...');
+                console.log('Enlace de dudas clickeado');
+            });
+            
+            // Icono de perfil
+            iconoPerfil.addEventListener('click', function() {
+                console.log('Perfil clickeado');
+                alert('Abriendo perfil de usuario...');
+            });
+            
+            // Mostrar panel de conductores
+            botonConductores.addEventListener('click', function() {
+                this.classList.add('pulsado');
+                setTimeout(() => {
+                    this.classList.remove('pulsado');
+                }, 200);
+                
+                panelConductores.classList.add('visible');
+                console.log('Panel de conductores abierto');
+            });
+            
+            // Cerrar panel de conductores
+            cerrarConductores.addEventListener('click', function() {
+                panelConductores.classList.remove('visible');
+                console.log('Panel de conductores cerrado');
+            });
+            
+            // Botones de Ver Perfil - Abrir modal correspondiente
+            botonesVerPerfil.forEach((boton) => {
+                boton.addEventListener('click', function() {
+                    const conductorId = this.getAttribute('data-conductor');
+                    const modalPerfil = document.getElementById(`perfil-conductor-${conductorId}`);
+                    
+                    // Cerrar panel de conductores
+                    panelConductores.classList.remove('visible');
+                    
+                    // Mostrar modal de perfil
+                    modalPerfil.classList.add('visible');
+                    console.log(`Mostrando perfil del conductor ${conductorId}`);
+                });
+            });
+            
+            // Botones de cerrar modal
+            botonesCerrarModal.forEach((boton) => {
+                boton.addEventListener('click', function() {
+                    const modalPerfil = this.closest('.modal-perfil');
+                    modalPerfil.classList.remove('visible');
+                    
+                    // Volver a mostrar panel de conductores
+                    panelConductores.classList.add('visible');
+                    console.log('Modal de perfil cerrado');
+                });
+            });
+            
+            // Cerrar globo al hacer clic fuera de él
+            document.addEventListener('click', function(e) {
+                if (!botIcono.contains(e.target) && !globoDialogo.contains(e.target)) {
+                    globoDialogo.classList.remove('visible');
+                }
+            });
+            
+            // Cerrar modal al hacer clic fuera de él
+            document.addEventListener('click', function(e) {
+                modalesPerfiles.forEach((modal) => {
+                    const contenidoModal = modal.querySelector('.contenido-modal-perfil');
+                    if (modal.classList.contains('visible') && !contenidoModal.contains(e.target)) {
+                        modal.classList.remove('visible');
+                        panelConductores.classList.add('visible');
+                    }
+                });
+            });
+            
+            // Simular movimiento de marcadores
+            function animarMarcadores() {
+                const marcadores = document.querySelectorAll('.marcador');
+                marcadores.forEach((marcador, index) => {
+                    setTimeout(() => {
+                        marcador.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            marcador.style.transform = 'scale(1)';
+                        }, 200);
+                    }, index * 500);
+                });
+            }
+            
+            // Animar marcadores cada 3 segundos
+            setInterval(animarMarcadores, 3000);
+        });
+    </script>
+</body>
+</html>

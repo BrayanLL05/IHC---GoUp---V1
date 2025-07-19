@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoUp - Registro de Conductor</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles_registro_con.css">
+</head>
+<body>
+    <div class="contenedor-registro">
+        <h1 class="titulo">Registrarse</h1>
+        <p class="subtitulo">Como Conductor ...</p>
+
+        <form class="formulario-registro">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Nombre(s)" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Apellidos" required>
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Correo" required>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="DNI" required>
+            </div>
+
+            <div class="form-group">
+                <input type="tel" class="form-control" placeholder="Nro. Teléfono" required>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="boton boton-primario btn-block" id="boton-vehiculo">
+                    Ingresar Datos del Vehículo
+                </button>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Contraseña" required>
+            </div>
+
+            <button type="submit" class="boton boton-primario btn-block">Registrar Conductor</button>
+        </form>
+
+    </div>
+
+    <!-- Modal para registrar vehículo -->
+    <div id="modal-vehiculo" class="modal-overlay">
+        <div class="modal-contenido">
+            <h2 class="modal-titulo">Registrar Vehículo</h2>
+            
+            <form class="formulario-vehiculo">
+                <div class="form-group campo-grupo">
+                    <label for="marca">Marca:</label>
+                    <input type="text" class="form-control" id="marca" name="marca" required>
+                </div>
+
+                <div class="form-group campo-grupo">
+                    <label for="modelo">Modelo:</label>
+                    <input type="text" class="form-control" id="modelo" name="modelo" required>
+                </div>
+
+                <div class="form-group campo-grupo">
+                    <label for="año">Año de Fabricación:</label>
+                    <div class="fecha-contenedor d-flex align-items-center">
+                        <input type="date" class="form-control" id="año" name="año" required>
+                        <span class="icono-calendario ml-2">📅</span>
+                    </div>
+                </div>
+
+                <div class="form-group campo-grupo">
+                    <label for="placa">Placa:</label>
+                    <input type="text" class="form-control" id="placa" name="placa" required>
+                </div>
+
+                <div class="form-group campo-grupo">
+                    <label for="foto-vehiculo">Foto del Vehículo:</label>
+                    <button type="button" class="boton-archivo btn btn-secondary btn-sm">Adjuntar Imagen</button>
+                    <input type="file" id="foto-vehiculo" name="foto-vehiculo" accept="image/*" style="display: none;">
+                </div>
+
+                <div class="form-group campo-grupo">
+                    <label for="soat">SOAT Vigente:</label>
+                    <button type="button" class="boton-archivo btn btn-secondary btn-sm">Subir Archivo</button>
+                    <input type="file" id="soat" name="soat" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                </div>
+
+                <div class="botones-modal d-flex justify-content-between">
+                    <a href="registro_conductor.html"><button type="button" class="boton boton-secundario">Volver</button></a>
+                    <button type="submit" class="boton boton-primario">Registrar Vehículo</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botonVehiculo = document.getElementById('boton-vehiculo');
+            const modalVehiculo = document.getElementById('modal-vehiculo');
+            const botonVolver = document.getElementById('boton-volver');
+            const formularioVehiculo = document.querySelector('.formulario-vehiculo');
+            
+            // Abrir modal
+            botonVehiculo.addEventListener('click', function() {
+                modalVehiculo.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevenir scroll del fondo
+            });
+            
+            // Cerrar modal
+            botonVolver.addEventListener('click', function() {
+                modalVehiculo.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Cerrar modal al hacer clic fuera
+            modalVehiculo.addEventListener('click', function(e) {
+                if (e.target === modalVehiculo) {
+                    modalVehiculo.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Manejar botones de archivo
+            const botonesArchivo = document.querySelectorAll('.boton-archivo');
+            botonesArchivo.forEach((boton, index) => {
+                boton.addEventListener('click', function() {
+                    const inputs = document.querySelectorAll('input[type="file"]');
+                    inputs[index].click();
+                });
+            });
+            
+            // Manejar envío del formulario del vehículo
+            formularioVehiculo.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Datos del vehículo registrados correctamente');
+                modalVehiculo.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>

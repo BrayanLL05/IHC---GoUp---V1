@@ -1,0 +1,349 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+/* HEADER DE LA APLICACIÓN */
+.header-app {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  position: relative;
+}
+
+.boton-atras {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.boton-atras:hover {
+  background-color: rgba(44, 62, 80, 0.1);
+  transform: scale(1.1);
+}
+
+.boton-atras a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titulo-app {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2c3e50;
+  flex: 1;
+  text-align: center;
+}
+
+.icono-perfil {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background-color: rgba(44, 62, 80, 0.1);
+}
+
+.icono-perfil:hover {
+  background-color: rgba(44, 62, 80, 0.2);
+  transform: scale(1.1);
+}
+
+/* ÁREA DEL MAPA */
+.contenedor-mapa {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.mapa-fondo {
+  background-image: url("img/mapa_goup.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.contenedor-principal {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100%;
+}
+
+.panel-chat{
+  background-color: rgba(74, 155, 142, 0.9);
+  border-radius: 5px;
+  width: 100%;
+  max-width: 350px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  animation: aparecer 0.5s ease-out;
+  text-align: center;
+  border: 5px solid rgba(0, 0, 0, 0.2);
+}
+
+/* HEADER DEL CHAT */
+.header-chat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  background-color: #2c3e50;
+  color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.header-izquierda {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+
+
+.info-conductor {
+  display: flex;
+  flex-direction: column;
+}
+
+.nombre-conductor {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.vehiculo {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.boton-llamada {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.boton-llamada:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* ÁREA DE MENSAJES */
+.contenedor-mensajes {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mensaje {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.mensaje-usuario {
+  justify-content: flex-end;
+}
+
+.mensaje-conductor {
+  justify-content: flex-start;
+}
+
+.burbuja-mensaje {
+  max-width: 70%;
+  padding: 12px 15px;
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  word-wrap: break-word;
+}
+
+.mensaje-usuario .burbuja-mensaje {
+  background-color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.mensaje-usuario .burbuja-mensaje::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+}
+
+.mensaje-conductor .burbuja-mensaje {
+  background-color: white;
+  border-bottom-left-radius: 4px;
+}
+
+.mensaje-conductor .burbuja-mensaje::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+}
+
+.burbuja-mensaje p {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ÁREA DE ENTRADA DE MENSAJE */
+.entrada-mensaje {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#input-mensaje {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 15px;
+  border-radius: 20px;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+#input-mensaje::placeholder {
+  color: #95a5a6;
+}
+
+.boton-enviar {
+  background: none;
+  border: none;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+  background-color: #2c3e50;
+}
+
+.boton-enviar:hover {
+  background-color: #1a252f;
+  transform: scale(1.05);
+}
+
+.boton-enviar img {
+  width: 20px;
+  height: 20px;
+}
+
+/* DISEÑO RESPONSIVO */
+@media (max-width: 768px) {
+  .header-chat {
+    padding: 12px 15px;
+  }
+
+  .nombre-conductor {
+    font-size: 15px;
+  }
+
+  .vehiculo {
+    font-size: 11px;
+  }
+
+  .burbuja-mensaje {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-chat {
+    padding: 10px;
+  }
+
+  .header-izquierda {
+    gap: 10px;
+  }
+
+  .nombre-conductor {
+    font-size: 14px;
+  }
+
+  .vehiculo {
+    font-size: 10px;
+  }
+
+  .contenedor-mensajes {
+    padding: 10px;
+  }
+
+  .burbuja-mensaje {
+    padding: 10px 12px;
+  }
+
+  .burbuja-mensaje p {
+    font-size: 13px;
+  }
+
+  #input-mensaje {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .boton-enviar {
+    width: 40px;
+    height: 40px;
+  }
+}
